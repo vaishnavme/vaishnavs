@@ -1,7 +1,12 @@
+import { ReactNode } from "react";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
 
-function Layout(props) {
+interface ILayoutProps {
+  children: ReactNode;
+}
+
+function Layout(props: ILayoutProps) {
   const { children } = props;
   return (
     <>
