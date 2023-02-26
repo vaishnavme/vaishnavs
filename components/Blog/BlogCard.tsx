@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { helpers } from "utils/helpers";
-import Icon from "../UIElements/SVGIcons/icons";
+import Icon from "../UIElements/SVGIcons";
 
 interface IBlogCardProps {
   post: { [key: string]: string };
@@ -9,7 +8,7 @@ interface IBlogCardProps {
 const BlogCard = (props: IBlogCardProps) => {
   const { post } = props;
 
-  const date = helpers.getDate(post.date);
+  // const date = helpers.getDate(post.date);
 
   return (
     <article className="md:grid md:grid-cols-4 md:items-baseline">
@@ -29,7 +28,7 @@ const BlogCard = (props: IBlogCardProps) => {
           >
             <span className="h-4 w-0.5 rounded-full bg-zinc-200 dark:bg-zinc-500"></span>
           </span>
-          {date}
+          {/* {date} */}
         </time>
         <p className="relative z-10 mt-2 text-sm text-zinc-600 dark:text-zinc-400">
           {post.description}
@@ -43,7 +42,7 @@ const BlogCard = (props: IBlogCardProps) => {
         </div>
       </div>
       <time className="mt-1 hidden md:block relative z-10 order-first mb-3 flex items-center text-sm text-zinc-400 dark:text-zinc-500">
-        {date}
+        {/* {date} */}
       </time>
     </article>
   );
