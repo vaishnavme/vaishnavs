@@ -1,8 +1,8 @@
 export interface Database {
   object: string;
   id: string;
-  created_time: Date;
-  last_edited_time: Date;
+  created_time: string;
+  last_edited_time: string;
   created_by: TedBy;
   last_edited_by: TedBy;
   cover?: null;
@@ -36,7 +36,7 @@ interface Properties {
 interface Created {
   id: string;
   type: string;
-  created_time: Date;
+  created_time: string;
 }
 
 interface DateClass {
@@ -46,7 +46,7 @@ interface DateClass {
 }
 
 interface DateDate {
-  start: Date;
+  start: string;
   end?: null;
   time_zone?: null;
 }

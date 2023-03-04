@@ -1,4 +1,4 @@
-import { Client } from "@notionhq/client";
+import { Client, isFullPage } from "@notionhq/client";
 import matter from "gray-matter";
 import { serialize } from "next-mdx-remote/serialize";
 import remarkGfm from "remark-gfm";
@@ -6,7 +6,8 @@ import rehypeSlug from "rehype-slug";
 import rehypeCodeTitles from "rehype-code-titles";
 import rehypePrism from 'rehype-prism-plus';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
-import { Database } from "@/utils/types";
+import { Database, Post } from "@/utils/types";
+import { DatabaseObjectResponse, GetDatabaseResponse, ListDatabasesResponse, PageObjectResponse, PartialDatabaseObjectResponse, PartialPageObjectResponse, PropertyItemListResponse } from "@notionhq/client/build/src/api-endpoints";
 
 const { NotionToMarkdown } = require("notion-to-md");
 
@@ -31,11 +32,10 @@ const notionServices = {
         direction: "descending"
       }]
     });
-
     const notionArticles = notionArticlesList.results.map((notionData) => notionServices.getPageMetaData(notionData));
     return notionArticles;
   },
-  getPageMetaData: (post: Database) => {
+  getPageMetaData: (post: Database | any) => {
     return {
       id: post.id,
       title: post.properties.Name.title[0].plain_text,
@@ -56,7 +56,7 @@ const notionServices = {
         },
       }
     });
-    const record: Database = response.results[0] as Database;
+    const record= response.results[0];
 
     const frontmatter = notionServices.getPageMetaData(record);
 
