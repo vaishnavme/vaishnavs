@@ -1,14 +1,13 @@
+import { Post } from "@/utils/types";
 import Link from "next/link";
 import Icon from "../UIElements/SVGIcons";
 
 interface IBlogCardProps {
-  post: { [key: string]: string };
+  post: Post;
 }
 
 const BlogCard = (props: IBlogCardProps) => {
   const { post } = props;
-
-  // const date = helpers.getDate(post.date);
 
   return (
     <article className="md:grid md:grid-cols-4 md:items-baseline">
@@ -41,7 +40,7 @@ const BlogCard = (props: IBlogCardProps) => {
           <Icon.CheveronRight size={14} strokeWidth={2} />
         </div>
       </div>
-      <time className="mt-1 hidden md:block relative z-10 order-first mb-3 flex items-center text-sm text-zinc-400 dark:text-zinc-500">
+      <time className="mt-1 md:block relative z-10 order-first mb-3 flex items-center text-sm text-zinc-400 dark:text-zinc-500">
         {/* {date} */}
       </time>
     </article>

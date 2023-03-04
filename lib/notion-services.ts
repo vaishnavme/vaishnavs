@@ -6,6 +6,7 @@ import rehypeSlug from "rehype-slug";
 import rehypeCodeTitles from "rehype-code-titles";
 import rehypePrism from 'rehype-prism-plus';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import { Database } from "@/utils/types";
 
 const { NotionToMarkdown } = require("notion-to-md");
 
@@ -34,7 +35,7 @@ const notionServices = {
     const notionArticles = notionArticlesList.results.map((notionData) => notionServices.getPageMetaData(notionData));
     return notionArticles;
   },
-  getPageMetaData: (post:any) => {
+  getPageMetaData: (post: Database) => {
     return {
       id: post.id,
       title: post.properties.Name.title[0].plain_text,
@@ -43,7 +44,7 @@ const notionServices = {
       date: post.properties.Created.created_time
     }
   },
-  getBlogPostBySlug: async(slug) => {
+  getBlogPostBySlug: async(slug: string) => {
     const response = await notion.databases.query({
       database_id: `${process.env.NOTION_DATABASE_ID}`,
       filter: {
@@ -55,8 +56,9 @@ const notionServices = {
         },
       }
     });
+    const record: Database = response.results[0] as Database;
 
-    const frontmatter = notionServices.getPageMetaData(response.results[0]);
+    const frontmatter = notionServices.getPageMetaData(record);
 
     const markdownBlocks = await n2m.pageToMarkdown(frontmatter.id);
     const markdownStrings = n2m.toMarkdownString(markdownBlocks);
@@ -85,7 +87,7 @@ const notionServices = {
 
     return {
       ...mdxSource,
-      frontmatter,
+      frontmatter
     }
   }
 }

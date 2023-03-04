@@ -1,13 +1,18 @@
+import { GetStaticPaths, GetStaticProps } from "next";
+import { ParsedUrlQuery } from "querystring";
+import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import notionServices from "@/lib/notion-services";
-import { MDXRemote } from "next-mdx-remote";
 
-const Article = (props) => {
-  const { post } = props;
+interface Article {
+  article: MDXRemoteSerializeResult;
+}
 
+const Article = (props: Article) => {
+  const { article } = props;
   return (
     <div className="max-w-2xl mx-auto pb-10">
       <article className="prose dark:prose-dark">
-        <MDXRemote compiledSource={post.compiledSource} />
+        <MDXRemote {...article} />
       </article>
     </div>
   );
@@ -15,7 +20,11 @@ const Article = (props) => {
 
 export default Article;
 
-export const getStaticPaths = async () => {
+interface IParams extends ParsedUrlQuery {
+  slug: string;
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
   const posts = await notionServices.getAllPublished();
   const paths = posts.map(({ slug }) => ({ params: { slug } }));
 
@@ -25,13 +34,14 @@ export const getStaticPaths = async () => {
   };
 };
 
-export const getStaticProps = async ({ params }: any) => {
-  const { slug } = params;
-  const post = await notionServices.getBlogPostBySlug(slug);
+export const getStaticProps: GetStaticProps = async (context) => {
+  const { slug } = context.params as IParams;
+
+  const article = await notionServices.getBlogPostBySlug(slug);
 
   return {
     props: {
-      post,
+      article,
     },
   };
 };

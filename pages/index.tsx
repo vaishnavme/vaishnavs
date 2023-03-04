@@ -1,9 +1,11 @@
 import Head from "next/head";
-import { Inter } from "next/font/google";
 import notionServices from "@/lib/notion-services";
 import { BlogCard } from "@/components/Blog";
+import { Post, Posts } from "@/utils/types";
 
-export default function Home({ posts }: any) {
+export default function Home(props: Posts) {
+  const { posts } = props;
+
   return (
     <>
       <Head>
@@ -25,7 +27,7 @@ export default function Home({ posts }: any) {
         </div>
         {posts && posts.length > 0 && (
           <ul className="flex max-w-3xl flex-col space-y-16 pb-10">
-            {posts.map((post) => (
+            {posts.map((post: Post) => (
               <li key={post.slug}>
                 <BlogCard post={post} />
               </li>
@@ -39,7 +41,7 @@ export default function Home({ posts }: any) {
 
 export async function getStaticProps() {
   const posts = await notionServices.getAllPublished();
-  console.log("posts: ", posts);
+
   return {
     props: {
       posts: JSON.parse(JSON.stringify(posts)),
