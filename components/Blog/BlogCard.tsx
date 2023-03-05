@@ -43,6 +43,9 @@ const BlogCard = (props: IBlogCardProps) => {
           <Icon.CheveronRight size={14} strokeWidth={2} />
         </div>
       </div>
+      <time className="mt-1 hidden md:flex relative z-10 order-first mb-3 items-center text-sm text-zinc-400 dark:text-zinc-500">
+        {date}
+      </time>
     </article>
   );
 };
