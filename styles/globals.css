@@ -222,5 +222,9 @@ pre[class*="language-"] {
 }
 
 blockquote {
-  @apply border-l-2 border-l-sky-400 pl-4 italic rounded;
+  @apply border-l-2 border-l-sky-400 pl-4 italic rounded text-sm;
+}
+
+p > code {
+  color: #ef56ad;
 }
