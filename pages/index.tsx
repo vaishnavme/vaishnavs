@@ -6,13 +6,29 @@ import { Post, Posts } from "@/utils/types";
 export default function Home(props: Posts) {
   const { posts } = props;
 
+  const metaOG = {
+    title: "Vaishnav Chandurkar",
+    description: "Software Engineer @Peerlist",
+    keywords: "Engineer, Frontend Developer, Developer",
+  };
+
   return (
     <>
       <Head>
-        <title>Vaishnav Chandurkar</title>
-        <meta name="description" content="Portfolio Site" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <title>{`${metaOG.title}`}</title>
+        <meta name="description" content={metaOG.description} />
+        <meta name="keywords" content="Peerlist, Project, Proof of work" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={metaOG.title} />
+        {/* <meta property="og:image" content={metaOG.ogImage} /> */}
+        <meta property="og:description" content={metaOG.description} />
+        <meta property="og:site_name" content="Peerlist" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@PeerlistHQ" />
+        <meta name="twitter:title" content={metaOG.title} />
+        {/* <meta property="twitter:image" content={metaOG.ogImage} /> */}
+        <meta property="twitter:description" content={metaOG.description} />
       </Head>
       <div>
         <div className="max-w-2xl mb-10">
@@ -40,11 +56,19 @@ export default function Home(props: Posts) {
 }
 
 export async function getStaticProps() {
-  const posts = await notionServices.getAllPublished();
+  try {
+    const posts = await notionServices.getAllPublished();
 
-  return {
-    props: {
-      posts: JSON.parse(JSON.stringify(posts)),
-    },
-  };
+    return {
+      props: {
+        posts: JSON.parse(JSON.stringify(posts)),
+      },
+    };
+  } catch (apiError) {
+    return {
+      props: {
+        posts: null,
+      },
+    };
+  }
 }
