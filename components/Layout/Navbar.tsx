@@ -1,6 +1,5 @@
 import { useTheme } from "next-themes";
 import Image from "next/image";
-import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import Icon from "../UIElements/SVGIcons";
 
@@ -23,7 +22,7 @@ function Navbar() {
           />
           <div>
             <h1 className="font-normal text-base leading-5">
-              Hi, I'm Vaishnav
+              Hi, I&apos;m Vaishnav
             </h1>
             <p className="text-xs text-zinc-800 dark:text-zinc-100">& I code</p>
           </div>
