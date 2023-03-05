@@ -1,7 +1,11 @@
 import Head from "next/head";
-import { Inter } from "next/font/google";
+import notionServices from "@/lib/notion-services";
+import { BlogCard } from "@/components/Blog";
+import { Post, Posts } from "@/utils/types";
 
-export default function Home() {
+export default function Home(props: Posts) {
+  const { posts } = props;
+
   return (
     <>
       <Head>
@@ -11,8 +15,36 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div>
-        <h1>here</h1>
+        <div className="max-w-2xl mb-10">
+          <h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl leading-[56px]">
+            Writing on software design, company building, and the aerospace
+            industry.
+          </h1>
+          <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400 leading-7 font-light">
+            All of my long-form thoughts on programming, leadership, product
+            design, and more, collected in chronological order.
+          </p>
+        </div>
+        {posts && posts.length > 0 && (
+          <ul className="flex max-w-3xl flex-col space-y-16 pb-10">
+            {posts.map((post: Post) => (
+              <li key={post.slug}>
+                <BlogCard post={post} />
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </>
   );
+}
+
+export async function getStaticProps() {
+  const posts = await notionServices.getAllPublished();
+
+  return {
+    props: {
+      posts: JSON.parse(JSON.stringify(posts)),
+    },
+  };
 }
