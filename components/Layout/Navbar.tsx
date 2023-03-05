@@ -22,10 +22,10 @@ function Navbar() {
             className="rounded-full object-cover w-10 h-10"
           />
           <div>
-            <h1 className="font-normal text-base leading-5">vaishnav</h1>
-            <p className="text-xs text-zinc-800 dark:text-zinc-100">
-              I code, sometimes travel
-            </p>
+            <h1 className="font-normal text-base leading-5">
+              Hi, I'm Vaishnav
+            </h1>
+            <p className="text-xs text-zinc-800 dark:text-zinc-100">& I code</p>
           </div>
         </div>
         <div>
