@@ -220,3 +220,7 @@ pre[class*="language-"] {
 .token.entity {
 	cursor: help;
 }
+
+blockquote {
+  @apply border-l-2 border-l-sky-400 pl-4 italic rounded;
+}
