@@ -2,8 +2,8 @@ import Head from "next/head";
 import notionServices from "@/lib/notion-services";
 import { BlogCard } from "@/components/Blog";
 import { Post, Posts } from "@/utils/types";
-import rufina from "@/components/UIElements/font";
 import MetaSEO from "@/components/UIElements/MetaSEO";
+import rufina from "@/components/UIElements/Font";
 
 export default function Home(props: Posts) {
   const { posts } = props;
