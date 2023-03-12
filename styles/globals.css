@@ -8,9 +8,16 @@
   box-sizing: border-box;
 }
 
-
 .prose p {
   @apply text-zinc-600 dark:text-zinc-400 leading-7 font-light;
+}
+
+.prose a strong {
+  @apply font-normal;
+}
+
+.prose h1 > strong, h2 > strong, h3> strong, h4 > strong, h5 > strong, h6 > strong {
+  @apply font-semibold;
 }
 
 .prose :where(p):not(:where([class~=not-prose] *)) {
@@ -219,4 +226,12 @@ pre[class*="language-"] {
 
 .token.entity {
 	cursor: help;
+}
+
+blockquote {
+  @apply border-l-2 border-l-sky-400 pl-4 italic rounded text-sm;
+}
+
+p > code {
+  color: #ef56ad;
 }

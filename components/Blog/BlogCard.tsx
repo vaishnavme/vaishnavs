@@ -1,6 +1,6 @@
+import Link from "next/link";
 import helpers from "@/utils/helpers";
 import { Post } from "@/utils/types";
-import Link from "next/link";
 import Icon from "../UIElements/SVGIcons";
 
 interface IBlogCardProps {
@@ -15,7 +15,7 @@ const BlogCard = (props: IBlogCardProps) => {
   return (
     <article className="md:grid md:grid-cols-4 md:items-baseline">
       <div className="md:col-span-3 group relative flex flex-col items-start">
-        <h2 className="text-sm sm:text-base font-medium tracking-wide text-zinc-800 dark:text-zinc-100">
+        <h2 className="text-sm sm:text-base font-medium text-zinc-800 dark:text-zinc-100">
           <div className="absolute -inset-y-6 -inset-x-4 z-0 scale-95 bg-zinc-50 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 dark:bg-zinc-800/50 sm:-inset-x-6 sm:rounded-2xl"></div>
           <Link href={`/blog/${post.slug}`}>
             <span className="absolute -inset-y-6 -inset-x-4 z-20 sm:-inset-x-6 sm:rounded-2xl"></span>
@@ -43,6 +43,9 @@ const BlogCard = (props: IBlogCardProps) => {
           <Icon.CheveronRight size={14} strokeWidth={2} />
         </div>
       </div>
+      <time className="mt-1 hidden md:flex relative z-10 order-first mb-3 items-center text-sm text-zinc-400 dark:text-zinc-500">
+        {date}
+      </time>
     </article>
   );
 };

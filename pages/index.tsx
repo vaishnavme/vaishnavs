@@ -2,28 +2,35 @@ import Head from "next/head";
 import notionServices from "@/lib/notion-services";
 import { BlogCard } from "@/components/Blog";
 import { Post, Posts } from "@/utils/types";
+import MetaSEO from "@/components/UIElements/MetaSEO";
+import rufina from "@/components/UIElements/Font";
 
 export default function Home(props: Posts) {
   const { posts } = props;
 
+  const metaOG = {
+    title: "Vaishnav Chandurkar",
+    description: "Software Engineer @Peerlist",
+    keywords: "Engineer, Frontend Developer, Developer",
+  };
+
   return (
     <>
       <Head>
-        <title>Vaishnav Chandurkar</title>
-        <meta name="description" content="Portfolio Site" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <MetaSEO
+          title="Blog | Vaishnav Chandurkar"
+          description="Software Engineer @Peerlist"
+          keywords="Engineer, Frontend Developer, Developer"
+        />
       </Head>
       <div>
         <div className="max-w-2xl mb-10">
-          <h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl leading-[56px]">
-            Writing on software design, company building, and the aerospace
-            industry.
+          <h1
+            className={`${rufina.className} text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100`}
+          >
+            My Journey in Software Development Through Projects, Tutorials, and
+            Insights
           </h1>
-          <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400 leading-7 font-light">
-            All of my long-form thoughts on programming, leadership, product
-            design, and more, collected in chronological order.
-          </p>
         </div>
         {posts && posts.length > 0 && (
           <ul className="flex max-w-3xl flex-col space-y-16 pb-10">
@@ -40,11 +47,19 @@ export default function Home(props: Posts) {
 }
 
 export async function getStaticProps() {
-  const posts = await notionServices.getAllPublished();
+  try {
+    const posts = await notionServices.getAllPublished();
 
-  return {
-    props: {
-      posts: JSON.parse(JSON.stringify(posts)),
-    },
-  };
+    return {
+      props: {
+        posts: JSON.parse(JSON.stringify(posts)),
+      },
+    };
+  } catch (apiError) {
+    return {
+      props: {
+        posts: null,
+      },
+    };
+  }
 }
