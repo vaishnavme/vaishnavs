@@ -1,13 +1,8 @@
 import Head from "next/head";
-import { Rufina } from "next/font/google";
 import notionServices from "@/lib/notion-services";
 import { BlogCard } from "@/components/Blog";
 import { Post, Posts } from "@/utils/types";
-
-const rufina = Rufina({
-  subsets: ["latin"],
-  weight: ["400"],
-});
+import rufina from "@/components/UIElements/font";
 
 export default function Home(props: Posts) {
   const { posts } = props;
