@@ -1,10 +1,16 @@
 import { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
+import { Rufina } from "next/font/google";
 import { ParsedUrlQuery } from "querystring";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import notionServices from "@/lib/notion-services";
 import helpers from "@/utils/helpers";
 import { Post } from "@/utils/types";
+
+const rufina = Rufina({
+  subsets: ["latin"],
+  weight: ["400"],
+});
 
 interface Article {
   article: MDXRemoteSerializeResult;
@@ -48,7 +54,9 @@ const Article = (props: Article) => {
             <span className="h-4 w-0.5 rounded-full bg-zinc-200 dark:bg-zinc-500"></span>
             <span className="ml-3">{date}</span>
           </time>
-          <h1 className="mt-6 text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
+          <h1
+            className={`${rufina.className} mt-6 text-4xl font-bold tracking-normal text-zinc-800 dark:text-zinc-100`}
+          >
             {frontmatter.title}
           </h1>
           <div className="prose dark:prose-dark">

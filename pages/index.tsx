@@ -1,7 +1,13 @@
 import Head from "next/head";
+import { Rufina } from "next/font/google";
 import notionServices from "@/lib/notion-services";
 import { BlogCard } from "@/components/Blog";
 import { Post, Posts } from "@/utils/types";
+
+const rufina = Rufina({
+  subsets: ["latin"],
+  weight: ["400"],
+});
 
 export default function Home(props: Posts) {
   const { posts } = props;
@@ -32,14 +38,17 @@ export default function Home(props: Posts) {
       </Head>
       <div>
         <div className="max-w-2xl mb-10">
-          <h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl leading-[56px]">
-            Writing on software design, company building, and the aerospace
-            industry.
+          <h1
+            className={`${rufina.className} text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100`}
+          >
+            My Journey in Software Development Through Projects, Tutorials, and
+            Insights
           </h1>
-          <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400 leading-7 font-light">
+          {/* <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400 leading-7 font-light">
             All of my long-form thoughts on programming, leadership, product
             design, and more, collected in chronological order.
-          </p>
+            Exploring the World of Software Development Through Projects, Tutorials, and Insights
+          </p> */}
         </div>
         {posts && posts.length > 0 && (
           <ul className="flex max-w-3xl flex-col space-y-16 pb-10">
