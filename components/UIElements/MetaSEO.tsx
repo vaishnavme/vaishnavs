@@ -1,3 +1,5 @@
+import Head from "next/head";
+
 interface MetaSEO {
   title: string;
   description: string;
@@ -7,9 +9,10 @@ interface MetaSEO {
 
 const MetaSEO = (props: MetaSEO) => {
   const { title = "", description = "", keywords = "", ogImage = "" } = props;
+
   return (
-    <>
-      <title>{`${title}`}</title>
+    <Head>
+      <title>{title}</title>
       <meta name="description" content={description} />
 
       <meta property="og:type" content="website" />
@@ -31,7 +34,7 @@ const MetaSEO = (props: MetaSEO) => {
       ) : null}
 
       {keywords ? <meta name="keywords" content={keywords} /> : null}
-    </>
+    </Head>
   );
 };
 

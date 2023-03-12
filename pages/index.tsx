@@ -4,6 +4,7 @@ import { BlogCard } from "@/components/Blog";
 import { Post, Posts } from "@/utils/types";
 import MetaSEO from "@/components/UIElements/MetaSEO";
 import rufina from "@/components/UIElements/Font";
+import Illustration from "@/components/UIElements/SVGIcons/illustrations";
 
 export default function Home(props: Posts) {
   const { posts } = props;
@@ -16,13 +17,11 @@ export default function Home(props: Posts) {
 
   return (
     <>
-      <Head>
-        <MetaSEO
-          title="Blog | Vaishnav Chandurkar"
-          description="Software Engineer @Peerlist"
-          keywords="Engineer, Frontend Developer, Developer"
-        />
-      </Head>
+      <MetaSEO
+        title="Blog | Vaishnav Chandurkar"
+        description="Software Engineer @Peerlist"
+        keywords="Engineer, Frontend Developer, Developer"
+      />
       <div>
         <div className="max-w-2xl mb-10">
           <h1
@@ -32,6 +31,18 @@ export default function Home(props: Posts) {
             Insights
           </h1>
         </div>
+
+        {posts && posts.length === 0 ? (
+          <div className="max-w-fit flex flex-col items-center">
+            <Illustration.Thinking size={200} />
+            <span
+              className={`${rufina.className} font-thin mt-1 italic text-xs`}
+            >
+              Thinking... & Writing...
+            </span>
+          </div>
+        ) : null}
+
         {posts && posts.length > 0 && (
           <ul className="flex max-w-3xl flex-col space-y-16 pb-10">
             {posts.map((post: Post) => (
