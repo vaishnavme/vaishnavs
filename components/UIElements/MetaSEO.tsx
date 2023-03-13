@@ -12,24 +12,27 @@ const MetaSEO = (props: MetaSEO) => {
 
   return (
     <Head>
+      {/* HTML Meta Tags */}
       <title>{title}</title>
       <meta name="description" content={description} />
 
+      {/* Facebook Meta Tags */}
+      <meta property="og:url" content="https://vaishnavs.vercel.app" />
       <meta property="og:type" content="website" />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
-      <meta property="og:site_name" content="Vaishnav" />
 
+      {/* Twitter Meta Tags */}
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:site" content="@vaishnavs0" />
+      <meta property="twitter:domain" content="vaishnavs.vercel.app" />
+      <meta property="twitter:url" content="https:vaishnavs.vercel.app" />
       <meta name="twitter:title" content={title} />
-
-      <meta property="twitter:description" content={description} />
+      <meta name="twitter:description" content={description} />
 
       {ogImage ? (
         <>
-          <meta property="twitter:image" content={ogImage} />
           <meta property="og:image" content={ogImage} />
+          <meta property="twitter:image" content={ogImage} />
         </>
       ) : null}
 
