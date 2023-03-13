@@ -4,7 +4,7 @@ const handler = async (req: NextApiRequest, resp: NextApiResponse) => {
   const key = req.query.key as string;
   const path = req.query.path as string;
 
-  if(!path || !key || key !== process.env.REVALIDATION_TOKEN) {
+  if(!key || key !== process.env.REVALIDATION_TOKEN) {
     resp.status(400).send({
       success: false,
       message: 'Invalid token'
