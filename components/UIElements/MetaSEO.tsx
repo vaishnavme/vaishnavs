@@ -5,7 +5,6 @@ interface MetaSEO {
   description: string;
   keywords?: string;
   ogImage?: string;
-  url?: string;
 }
 
 const MetaSEO = (props: MetaSEO) => {
