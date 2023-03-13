@@ -8,4 +8,5 @@ export interface Post {
   slug: string,
   description: string,
   date: Date
+  tags: string
 }

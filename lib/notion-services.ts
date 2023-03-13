@@ -44,6 +44,7 @@ const notionServices = {
       slug: post.properties.slug.rich_text[0]?.plain_text,
       description: post.properties.Description.rich_text[0]?.plain_text,
       date: post.properties.Created.created_time,
+      tags: post.properties.Tags.rich_text[0]?.plain_text
     };
   },
   getBlogPostBySlug: async (slug: string) => {
@@ -72,11 +73,7 @@ const notionServices = {
 
     if(!record || typeof record === 'undefined') {
       throw new Error('blog post not found');
-      return;
     }
-
-    console.log("record: ", record)
-
     const frontmatter = notionServices.getPageMetaData(record);
 
     const markdownBlocks = await n2m.pageToMarkdown(frontmatter.id);

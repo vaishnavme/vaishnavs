@@ -31,6 +31,7 @@ interface Properties {
   Description: Description;
   Created: Created;
   Name: Name;
+  Tags: Tags;
 }
 
 interface Created {
@@ -52,6 +53,12 @@ interface DateDate {
 }
 
 interface Description {
+  id: string;
+  type: string;
+  rich_text: RichText[];
+}
+
+interface Tags {
   id: string;
   type: string;
   rich_text: RichText[];

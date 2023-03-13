@@ -23,16 +23,12 @@ const Article = (props: Article) => {
 
   const date = helpers.getDate(frontmatter.date);
 
-  const metaOG = {
-    title: frontmatter.title,
-    description: frontmatter.description,
-  };
-
   return (
     <>
       <MetaSEO
         title={frontmatter.title}
         description={frontmatter.description}
+        keywords={frontmatter.tags}
       />
 
       <div className="max-w-2xl mx-auto pb-10">
