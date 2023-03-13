@@ -45,7 +45,7 @@ export default function Home(props: Posts) {
         ) : null}
 
         {posts && posts.length > 0 && (
-          <ul className="flex max-w-3xl flex-col space-y-16 pb-10 bg-gray-800/60">
+          <ul className="flex max-w-3xl flex-col space-y-16 pb-10">
             {posts.map((post: Post) => (
               <li key={post.slug}>
                 <BlogCard post={post} />
