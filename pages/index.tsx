@@ -58,10 +58,9 @@ export default function Home(props: Posts) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   try {
     const posts = await notionServices.getAllPublished();
-
     return {
       props: {
         posts: JSON.parse(JSON.stringify(posts)),
