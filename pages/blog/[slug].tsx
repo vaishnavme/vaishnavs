@@ -74,12 +74,22 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (context) => {
   const { slug } = context.params as IParams;
 
-  const article = await notionServices.getBlogPostBySlug(slug);
+  try {
+    const article = await notionServices.getBlogPostBySlug(slug);
 
-  return {
-    props: {
-      article,
-      frontmatter: article.frontmatter,
-    },
-  };
+    if (!article) {
+      throw new Error("blog post not found");
+    }
+
+    return {
+      props: {
+        article,
+        frontmatter: article.frontmatter,
+      },
+    };
+  } catch (err) {
+    return {
+      notFound: true,
+    };
+  }
 };

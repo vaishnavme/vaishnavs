@@ -4,33 +4,37 @@ import { serialize } from "next-mdx-remote/serialize";
 import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
 import rehypeCodeTitles from "rehype-code-titles";
-import rehypePrism from 'rehype-prism-plus';
-import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import rehypePrism from "rehype-prism-plus";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import { Database, Post } from "@/utils/types";
 
 const { NotionToMarkdown } = require("notion-to-md");
 
 const notion = new Client({
-  auth: process.env.NOTION_SECRET
-})
+  auth: process.env.NOTION_SECRET,
+});
 const n2m = new NotionToMarkdown({ notionClient: notion });
 
 const notionServices = {
-  getAllPublished: async() => {
+  getAllPublished: async () => {
     const notionArticlesList = await notion.databases.query({
       database_id: `${process.env.NOTION_DATABASE_ID}`,
       filter: {
-        property: 'Published',
+        property: "Published",
         checkbox: {
-          equals: true
-        }
+          equals: true,
+        },
       },
-      sorts: [{
-        property: 'Date',
-        direction: "descending"
-      }]
+      sorts: [
+        {
+          property: "Date",
+          direction: "descending",
+        },
+      ],
     });
-    const notionArticles = notionArticlesList.results.map((notionData) => notionServices.getPageMetaData(notionData));
+    const notionArticles = notionArticlesList.results.map((notionData) =>
+      notionServices.getPageMetaData(notionData)
+    );
     return notionArticles;
   },
   getPageMetaData: (post: Database | any) => {
@@ -39,22 +43,39 @@ const notionServices = {
       title: post.properties.Name.title[0].plain_text,
       slug: post.properties.slug.rich_text[0]?.plain_text,
       description: post.properties.Description.rich_text[0]?.plain_text,
-      date: post.properties.Created.created_time
-    }
+      date: post.properties.Created.created_time,
+    };
   },
-  getBlogPostBySlug: async(slug: string) => {
+  getBlogPostBySlug: async (slug: string) => {
     const response = await notion.databases.query({
       database_id: `${process.env.NOTION_DATABASE_ID}`,
       filter: {
-        property: "slug",
-        formula: {
-          string: {
-            equals: slug,
+        and: [
+          {
+            property: "Published",
+            checkbox: {
+              equals: true,
+            },
           },
-        },
-      }
+          {
+            property: "slug",
+            formula: {
+              string: {
+                equals: slug,
+              },
+            },
+          },
+        ],
+      },
     });
-    const record= response.results[0];
+    const record = response.results[0];
+
+    if(!record || typeof record === 'undefined') {
+      throw new Error('blog post not found');
+      return;
+    }
+
+    console.log("record: ", record)
 
     const frontmatter = notionServices.getPageMetaData(record);
 
@@ -73,21 +94,21 @@ const notionServices = {
             rehypeAutolinkHeadings,
             {
               properties: {
-                className: ['anchor'],
+                className: ["anchor"],
               },
             },
           ],
         ],
-        format: 'mdx',
+        format: "mdx",
       },
       scope: data,
     });
 
     return {
       ...mdxSource,
-      frontmatter
-    }
-  }
-}
+      frontmatter,
+    };
+  },
+};
 
 export default notionServices;
