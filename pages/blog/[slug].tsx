@@ -7,6 +7,7 @@ import notionServices from "@/lib/notion-services";
 import helpers from "@/utils/helpers";
 import { Post } from "@/utils/types";
 import MetaSEO from "@/components/UIElements/MetaSEO";
+import MDXComponents from "@/components/MDXComponents";
 
 const rufina = Rufina({
   subsets: ["latin"],
@@ -33,17 +34,13 @@ const Article = (props: Article) => {
 
       <div className="max-w-2xl mx-auto pb-10">
         <article>
-          <time className="order-first flex items-center text-sm text-zinc-400 dark:text-zinc-500">
-            <span className="h-4 w-0.5 rounded-full bg-zinc-200 dark:bg-zinc-500"></span>
-            <span className="ml-3">{date}</span>
-          </time>
           <h1
             className={`${rufina.className} mt-6 text-4xl font-bold tracking-normal text-zinc-800 dark:text-zinc-100`}
           >
             {frontmatter.title}
           </h1>
           <div className="prose dark:prose-dark">
-            <MDXRemote {...article} />
+            <MDXRemote {...article} components={MDXComponents} />
           </div>
         </article>
       </div>
