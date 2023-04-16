@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 const Navbar = () => {
   return (
     <header>
-      <nav className="max-w-5xl mx-auto">
+      <nav className="max-w-2xl mx-auto">
         <div className="flex items-center justify-between p-4">
           <Link href="/">
             <Image
