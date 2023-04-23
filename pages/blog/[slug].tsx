@@ -1,6 +1,5 @@
 import { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
-import { Rufina } from "next/font/google";
 import { ParsedUrlQuery } from "querystring";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import notionServices from "@/lib/notion-services";
@@ -8,12 +7,7 @@ import helpers from "@/utils/helpers";
 import { Post } from "@/utils/types";
 import MetaSEO from "@/components/UIElements/MetaSEO";
 import MDXComponents from "@/components/MDXComponents";
-
-const rufina = Rufina({
-  subsets: ["latin"],
-  weight: ["400"],
-});
-
+import rufina from "@/components/UIElements/Font";
 interface Article {
   article: MDXRemoteSerializeResult;
   frontmatter: Post;

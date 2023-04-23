@@ -16,6 +16,14 @@ const notion = new Client({
 const n2m = new NotionToMarkdown({ notionClient: notion });
 
 const notionServices = {
+  getAllBlogs: async() => {
+    const allNotionBlogs = await notion.databases.query({
+      database_id: `${process.env.NOTION_DATABASE_ID}`,
+    });
+
+    const allNotionArticles = allNotionBlogs.results.map((blogData) => notionServices.getPageMetaData(blogData));
+    return allNotionArticles
+  },
   getAllPublished: async () => {
     const notionArticlesList = await notion.databases.query({
       database_id: `${process.env.NOTION_DATABASE_ID}`,
@@ -39,12 +47,12 @@ const notionServices = {
   },
   getPageMetaData: (post: Database | any) => {
     return {
-      id: post.id,
-      title: post.properties.Name.title[0].plain_text,
-      slug: post.properties.slug.rich_text[0]?.plain_text,
-      description: post.properties.Description.rich_text[0]?.plain_text,
-      date: post.properties.Created.created_time,
-      tags: post.properties.Tags.rich_text[0]?.plain_text
+      id: post?.id,
+      title: post?.properties?.Name.title[0]?.plain_text || '',
+      slug: post?.properties?.slug?.rich_text[0]?.plain_text || '',
+      description: post?.properties?.Description?.rich_text[0]?.plain_text || '',
+      date: post?.properties?.Created?.created_time || '',
+      tags: post?.properties?.Tags?.rich_text[0]?.plain_text || '', 
     };
   },
   getBlogPostBySlug: async (slug: string) => {

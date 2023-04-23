@@ -7,12 +7,6 @@ import rufina from "@/components/UIElements/Font";
 export default function Home(props: Posts) {
   const { posts } = props;
 
-  const metaOG = {
-    title: "Vaishnav Chandurkar",
-    description: "Software Engineer @Peerlist",
-    keywords: "Engineer, Frontend Developer, Developer",
-  };
-
   return (
     <>
       <MetaSEO
