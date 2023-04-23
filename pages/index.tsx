@@ -23,7 +23,7 @@ export default function Home(props: Posts) {
       />
       <div className="mt-56">
         {posts && posts.length > 0 && (
-          <ul className="flex max-w-3xl flex-col space-y-16 pb-10">
+          <ul className="flex max-w-3xl px-4 flex-col space-y-16 pb-10">
             {posts.map((post: Post) => (
               <li key={post.slug}>
                 <BlogCard post={post} />

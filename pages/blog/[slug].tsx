@@ -35,11 +35,11 @@ const Article = (props: Article) => {
       <div className="max-w-2xl mx-auto pb-10">
         <article>
           <h1
-            className={`${rufina.className} mt-6 text-4xl font-bold tracking-normal text-zinc-800 dark:text-zinc-100`}
+            className={`${rufina.className} mt-6 text-4xl font-bold tracking-normal text-gray-gray-12`}
           >
             {frontmatter.title}
           </h1>
-          <div className="prose dark:prose-dark">
+          <div className="prose">
             <MDXRemote {...article} components={MDXComponents} />
           </div>
         </article>
