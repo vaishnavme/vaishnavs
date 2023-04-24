@@ -1,7 +1,8 @@
+import { NextPage } from "next";
 import rufina from "@/components/UIElements/Font";
 import MetaSEO from "@/components/UIElements/MetaSEO";
 
-const About = () => {
+const About: NextPage = () => {
   return (
     <>
       <MetaSEO
