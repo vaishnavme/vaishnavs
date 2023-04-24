@@ -16,7 +16,7 @@
   @apply font-normal;
 }
 
-.prose h1 > strong, h2 > strong, h3> strong, h4 > strong, h5 > strong, h6 > strong {
+.prose h1 > strong, h2 > strong, h3> strong, h4 > strong, h5 > strong, h6 > strong, p > strong {
   @apply font-semibold;
 }
 

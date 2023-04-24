@@ -1,3 +1,4 @@
+import rufina from "@/components/UIElements/Font";
 import MetaSEO from "@/components/UIElements/MetaSEO";
 
 const About = () => {
@@ -10,7 +11,10 @@ const About = () => {
         ogImage="/images/vaishnav_og.png"
       />
 
-      <div>✍️ writing in progress</div>
+      <div className="mt-20">
+        <h1 className={`${rufina.className} text-3xl pb-10 mb-10`}>About me</h1>
+        ✍️ writing in progress
+      </div>
     </>
   );
 };
