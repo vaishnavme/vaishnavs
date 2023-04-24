@@ -9,10 +9,13 @@ interface ILayoutProps {
 function Layout(props: ILayoutProps) {
   const { children } = props;
   return (
-    <div>
-      <Navbar />
-      <main className="max-w-2xl mx-auto p-4">{children}</main>
-    </div>
+    <>
+      <div className="w-full h-screen relative">
+        <Navbar />
+        <main className="max-w-2xl mx-auto p-4">{children}</main>
+      </div>
+      <Footer />
+    </>
   );
 }
 

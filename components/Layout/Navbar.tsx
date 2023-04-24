@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
 
 const Navbar = () => {
   return (
@@ -18,7 +17,7 @@ const Navbar = () => {
           </Link>
 
           <div className="flex items-center gap-4 text-sm font-normal">
-            <Link href="/">Home</Link>
+            <Link href="/">Blog</Link>
             <Link href="/about">About</Link>
           </div>
         </div>

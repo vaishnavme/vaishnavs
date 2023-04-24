@@ -1,5 +1,4 @@
 import Link from "next/link";
-import OvalWrapper from "../UIElements/OvalWrapper";
 import Icon from "../UIElements/SVGIcons";
 
 const SOCIAL_LINK = [
@@ -22,27 +21,22 @@ const SOCIAL_LINK = [
 
 const Footer = () => {
   return (
-    <footer className="mx-auto max-w-6xl px-0 md:px-6 lg:px-10 w-full bg-white ring-1 ring-zinc-100 dark:bg-zinc-900 dark:ring-zinc-300/20 py-10">
-      <div className="max-w-5xl mx-auto px-4 md:px-6 lg:px-10 ">
-        <div className="w-full flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            {SOCIAL_LINK.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                target="_blank"
-                rel="noreferrer"
-              >
-                <OvalWrapper>{link.icon}</OvalWrapper>
-              </a>
-            ))}
-          </div>
-
-          <p className="text-zinc-600 dark:text-zinc-400 text-xs">
-            <span className="mr-1">©</span>
-            {new Date().getFullYear()} Vaishnav Chandurkar
-          </p>
+    <footer className="mb-0 border-t border-zinc-300/20 p-4 sm:p-6">
+      <div className="mx-auto max-w-2xl flex items-center justify-between p-4">
+        <div className="flex items-center gap-4">
+          {SOCIAL_LINK.map((social) => (
+            <Link
+              key={social.href}
+              href={social.href}
+              className="text-xs text-zinc-200 hover:text-white hover:underline transition-all"
+            >
+              {social.label}
+            </Link>
+          ))}
         </div>
+        <p className="text-xs text-zinc-200 hover:text-white ">
+          © Vaishnav Chandurkar
+        </p>
       </div>
     </footer>
   );
