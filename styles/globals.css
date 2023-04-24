@@ -9,14 +9,14 @@
 }
 
 .prose p {
-  @apply text-zinc-600 dark:text-zinc-400 leading-7 font-light;
+  @apply text-zinc-400 leading-7 font-light;
 }
 
 .prose a strong {
   @apply font-normal;
 }
 
-.prose h1 > strong, h2 > strong, h3> strong, h4 > strong, h5 > strong, h6 > strong {
+.prose h1 > strong, h2 > strong, h3> strong, h4 > strong, h5 > strong, h6 > strong, p > strong {
   @apply font-semibold;
 }
 

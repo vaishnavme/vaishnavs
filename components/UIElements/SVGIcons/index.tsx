@@ -1,10 +1,11 @@
 interface ISVGProps {
   size?: number;
   strokeWidth?: number;
+  [x: string]: any;
 }
 
 const Moon = (props: ISVGProps) => {
-  const { size = 24, strokeWidth = 2 } = props;
+  const { size = 24, strokeWidth = 2, ...rest } = props;
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -17,6 +18,7 @@ const Moon = (props: ISVGProps) => {
       fill="none"
       strokeLinecap="round"
       strokeLinejoin="round"
+      {...rest}
     >
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"></path>
@@ -27,7 +29,7 @@ const Moon = (props: ISVGProps) => {
 };
 
 const Sun = (props: ISVGProps) => {
-  const { size = 24, strokeWidth = 2 } = props;
+  const { size = 24, strokeWidth = 2, ...rest } = props;
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -37,7 +39,7 @@ const Sun = (props: ISVGProps) => {
       stroke="currentColor"
       width={size}
       height={size}
-      {...props}
+      {...rest}
     >
       <path
         strokeLinecap="round"
@@ -49,7 +51,7 @@ const Sun = (props: ISVGProps) => {
 };
 
 const LeftArrow = (props: ISVGProps) => {
-  const { size = 24, strokeWidth = 2 } = props;
+  const { size = 24, strokeWidth = 2, ...rest } = props;
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -59,6 +61,7 @@ const LeftArrow = (props: ISVGProps) => {
       stroke="currentColor"
       width={size}
       height={size}
+      {...rest}
     >
       <path
         strokeLinecap="round"
@@ -70,7 +73,7 @@ const LeftArrow = (props: ISVGProps) => {
 };
 
 const CheveronRight = (props: ISVGProps) => {
-  const { size = 24, strokeWidth = 1.5 } = props;
+  const { size = 24, strokeWidth = 1.5, ...rest } = props;
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -82,6 +85,7 @@ const CheveronRight = (props: ISVGProps) => {
       fill="none"
       strokeLinecap="round"
       strokeLinejoin="round"
+      {...rest}
     >
       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
       <polyline points="9 6 15 12 9 18" />
@@ -102,6 +106,7 @@ const Github = (props: ISVGProps) => {
       fill="none"
       strokeLinecap="round"
       strokeLinejoin="round"
+      {...props}
     >
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"></path>
@@ -122,6 +127,7 @@ const Twitter = (props: ISVGProps) => {
       fill="none"
       strokeLinecap="round"
       strokeLinejoin="round"
+      {...props}
     >
       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
       <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c0 -.249 1.51 -2.772 1.818 -4.013z"></path>
@@ -171,6 +177,51 @@ const Peerlist = (props: ISVGProps) => {
   );
 };
 
+const ArrowRight = (props: ISVGProps) => {
+  const { size = 24, strokeWidth = 2, ...rest } = props;
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      strokeWidth={strokeWidth}
+      stroke="currentColor"
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...rest}
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M5 12l14 0"></path>
+      <path d="M15 16l4 -4"></path>
+      <path d="M15 8l4 4"></path>
+    </svg>
+  );
+};
+
+const Refresh = (props: ISVGProps) => {
+  const { size = 24, strokeWidth = 2, ...rest } = props;
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      strokeWidth={strokeWidth}
+      stroke="currentColor"
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...rest}
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" />
+      <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" />
+    </svg>
+  );
+};
+
 const Icon = {
   Moon,
   Sun,
@@ -179,6 +230,8 @@ const Icon = {
   Github,
   Twitter,
   Peerlist,
+  ArrowRight,
+  Refresh,
 };
 
 export default Icon;
