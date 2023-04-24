@@ -21,7 +21,7 @@ const SOCIAL_LINK = [
 
 const Footer = () => {
   return (
-    <footer className="mb-0 border-t border-zinc-300/20 p-4 sm:p-6">
+    <footer className="mb-0 border-t border-zinc-300/20 p-4 sm:p-6 bottom-0">
       <div className="mx-auto max-w-2xl flex items-center justify-between p-4">
         <div className="flex items-center gap-4">
           {SOCIAL_LINK.map((social) => (
