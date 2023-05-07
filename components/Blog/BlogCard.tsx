@@ -16,7 +16,7 @@ const BlogCard = (props: IBlogCardProps) => {
     <article className="group">
       <div className="md:col-span-3 group relative flex flex-col items-start">
         <h2 className="text-sm sm:text-base text-zinc-100">
-          <div className="absolute -inset-y-6 -inset-x-4 z-0 scale-95 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 dark:bg-zinc-800/50 sm:-inset-x-6 sm:rounded-2xl"></div>
+          <div className="absolute -inset-y-6 -inset-x-4 z-0 scale-95 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 bg-zinc-800/50 sm:-inset-x-6 sm:rounded-2xl rounded-md"></div>
           <Link href={`/blog/${post.slug}`}>
             <span className="absolute -inset-y-6 -inset-x-4 z-20 sm:-inset-x-6 sm:rounded-2xl"></span>
             <span className="relative z-10">{post.title}</span>

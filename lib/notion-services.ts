@@ -6,7 +6,7 @@ import rehypeSlug from "rehype-slug";
 import rehypeCodeTitles from "rehype-code-titles";
 import rehypePrism from "rehype-prism-plus";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
-import { Database, Post } from "@/utils/types";
+import { Database } from "@/utils/types";
 
 const { NotionToMarkdown } = require("notion-to-md");
 
