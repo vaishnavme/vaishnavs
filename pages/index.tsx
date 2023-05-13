@@ -3,6 +3,7 @@ import { BlogCard } from "@/components/Blog";
 import { Post, Posts } from "@/utils/types";
 import MetaSEO from "@/components/UIElements/MetaSEO";
 import rufina from "@/components/UIElements/Font";
+import { GetStaticProps } from "next";
 
 export default function Home(props: Posts) {
   const { posts } = props;
@@ -31,19 +32,17 @@ export default function Home(props: Posts) {
   );
 }
 
-export const getServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   try {
-    const posts = await notionServices.getAllPublished();
+    const allArticles = await notionServices.getAllPublished();
     return {
       props: {
-        posts: JSON.parse(JSON.stringify(posts)),
+        posts: JSON.parse(JSON.stringify(allArticles)),
       },
     };
-  } catch (apiError) {
+  } catch (error) {
     return {
-      props: {
-        posts: null,
-      },
+      notFound: true,
     };
   }
 };
