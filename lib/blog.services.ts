@@ -1,5 +1,6 @@
-import fs from "fs";
 import matter from "gray-matter";
+import readingTime from "reading-time";
+import fs from "fs";
 import path from "path";
 
 const blogService = {
@@ -17,10 +18,12 @@ const blogService = {
     
       const source = fs.readFileSync(articlePath);
 
-      const { data } = matter(source);
+      const { data, content } = matter(source);
+      const readTime = readingTime(content);
 
       const frontMatter = {
         ...data,
+        readTime,
         slug: article.replace(".mdx", '')
       }
       return frontMatter;
