@@ -29,7 +29,7 @@ const Blog = (props: IBlogPost) => {
         <h1 className="font-display text-5xl leading-[60px] mb-6">
           {post.header.title}
         </h1>
-        <p className="text-gray-400 font-light">
+        <p className="text-gray-500 text-sm">
           {helpers.dateFormatter(post.header.publishedAt)} •{" "}
           <span>{post.header.readTime?.text}</span>
         </p>

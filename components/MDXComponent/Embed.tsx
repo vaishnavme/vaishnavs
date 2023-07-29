@@ -4,28 +4,28 @@ interface IEmbed {
   type?: string;
 }
 
-const YouTube = ({ src }: any) => (
+const YouTube = ({ src, title }: { src: string; title?: string }) => (
   <div className="w-full h-full">
     <iframe
       width="100%"
       height="100%"
       src={src}
       className="aspect-video rounded-lg"
-      title=""
+      title={title}
       allow="encrypted-media; gyroscope; picture-in-picture; web-share"
       allowFullScreen
     />
   </div>
 );
 
-const CodeSandbox = ({ src }: any) => (
+const CodeSandbox = ({ src, title }: { src: string; title?: string }) => (
   <div className="w-full h-full">
     <iframe
       width="100%"
       height="100%"
       src={src}
       className="rounded-lg h-96"
-      title=""
+      title={title}
       allow="encrypted-media; gyroscope; picture-in-picture; web-share"
       allowFullScreen
     />
