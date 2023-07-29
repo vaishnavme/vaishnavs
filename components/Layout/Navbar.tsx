@@ -32,7 +32,7 @@ const Navbar = () => {
             className={`transition-all ${
               router.pathname === page.link
                 ? "hover:text-purple-500"
-                : "text-gray-400 font-light"
+                : "text-gray-500 font-light"
             }`}
           >
             {page.label}

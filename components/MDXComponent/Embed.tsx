@@ -33,15 +33,15 @@ const CodeSandbox = ({ src }: any) => (
 );
 
 const Embed = (props: IEmbed) => {
-  const { src, type } = props;
+  const { src, type, title = "" } = props;
 
   switch (type) {
     case "YOUTUBE": {
-      return <YouTube src={src} />;
+      return <YouTube src={src} title={title} />;
     }
 
     case "CODESANDBOX": {
-      return <CodeSandbox src={src} />;
+      return <CodeSandbox src={src} title={title} />;
     }
 
     default:
