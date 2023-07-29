@@ -1,7 +1,6 @@
 import fs from 'fs';
 import RSS from "rss";
 import blogService from "./blog.services";
-import { TPostFrontmatter, TPosts } from "@/utils/global.types";
 
 const generateRSSFeed = async() => {
   const site_url = 'https://vaishnav.vercel.app';
