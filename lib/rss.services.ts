@@ -3,7 +3,7 @@ import RSS from "rss";
 import blogService from "./blog.services";
 
 const generateRSSFeed = async() => {
-  const site_url = 'https://vaishnav.vercel.app';
+  const site_url = 'https://vaishnavs.vercel.app';
 
   const feedOptions = {
     title: 'Blog posts | RSS Feed',
