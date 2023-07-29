@@ -1,0 +1,48 @@
+---
+title: "as prop pattern in react"
+publishedAt: "2023-03-19"
+summary: "The 'as' prop pattern in React used in modern component libraries to specify underlying implementations. It provides examples and notes on best practices, making code more flexible and reusable."
+image: "/static/images/top-5-nextjs-resources/nextjs.png"
+---
+
+The "as" prop pattern is a common pattern used in modern component libraries like NextUI. This prop allows you to specify the underlying implementation of a component by specifying an HTML element or a custom component.
+
+By using the "as" prop pattern, you can write more flexible and reusable code. For example, if you have a button component that you want to render as a hyperlink in a specific scenario, you can structure your component like this:
+
+```jsx
+const Button = (props) => {
+	const { children, as: Component, ...rest } = props;
+	return (
+		<Component {...rest}>{children}</Component/>
+	)
+}
+
+Button.defaultProps = {
+	as: 'button'
+}
+```
+
+In this example, the "as" prop tells the Button component to render its wrapper in the component specified in the "as" prop value. If the "as" prop is not specified, the default element specified in the component will be used.
+
+## CodeSandbox Example
+
+<Embed
+  type="CODESANDBOX"
+  src="https://codesandbox.io/embed/as-prop-in-react-t9njgo?autoresize=1&fontsize=14&hidenavigation=1&theme=dark"
+/>
+
+The "as" prop pattern can be used in many other scenarios as well. For example, you could use it to create a flexible card component that can be rendered as a div, article, or section depending on the use case:
+
+```jsx
+const Card = ({ children, as: Component = "div", ...rest }) => {
+  return <Component {...rest}>{children}</Component>;
+};
+
+Card.defaultProps = {
+  as: "div",
+};
+```
+
+It's important to note that the "as" prop should only be used to change the underlying implementation of a component and not its behaviour. If you need to change the behaviour of a component, you should use different props or create a new component altogether.
+
+Overall, the "as" prop pattern is a powerful tool that can help you write more flexible and reusable code in your React applications.
