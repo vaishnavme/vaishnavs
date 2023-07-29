@@ -22,9 +22,11 @@ const Home = (props: TPosts) => {
           <li key={post.slug}>
             <Link
               href={`/blog/${post.slug}`}
-              className=" border-b border-gray-100 block py-4"
+              className=" border-b border-gray-100 block py-4 group"
             >
-              <h2 className="text-[28px] font-display">{post.title}</h2>
+              <h2 className="text-[28px] font-display group-hover:text-purple-500 transition-all duration-200">
+                {post.title}
+              </h2>
               <div className="text-sm font-light text-gray-400 mt-2">
                 <p className="mb-4 text-sm">
                   {helpers.dateFormatter(post.publishedAt)} •{" "}
