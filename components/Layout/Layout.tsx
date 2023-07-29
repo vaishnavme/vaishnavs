@@ -1,22 +1,19 @@
 import { ReactNode } from "react";
-import Footer from "./Footer";
 import Navbar from "./Navbar";
 
 interface ILayoutProps {
   children: ReactNode;
 }
 
-function Layout(props: ILayoutProps) {
+const Layout = (props: ILayoutProps) => {
   const { children } = props;
+
   return (
-    <>
-      <div className="w-full h-full min-h-screen relative">
-        <Navbar />
-        <main className="max-w-2xl mx-auto p-4">{children}</main>
-      </div>
-      <Footer />
-    </>
+    <div className="mx-auto max-w-2xl">
+      <Navbar />
+      <main className="p-4 my-10">{children}</main>
+    </div>
   );
-}
+};
 
 export default Layout;

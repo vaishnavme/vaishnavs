@@ -8,6 +8,10 @@ module.exports = {
   darkMode: "class",
   theme: {
     extend: {
+      fontFamily: {
+        body: ["Inter", "sans"],
+        display: "Rufina",
+      },
       colors: {
         gray: {
           "gray-1": "#161616",

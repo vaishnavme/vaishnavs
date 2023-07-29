@@ -1,40 +1,53 @@
-import notionServices from "@/lib/notion-services";
-import { BlogCard } from "@/components/Blog";
-import { Post, Posts } from "@/utils/types";
-import MetaSEO from "@/components/UIElements/MetaSEO";
-import rufina from "@/components/UIElements/Font";
+import Link from "next/link";
 import { GetStaticProps } from "next";
+import blogService from "@/lib/blog.services";
+import helpers from "@/utils/helpers";
+import { TPostFrontmatter, TPosts } from "@/utils/global.types";
 
-export default function Home(props: Posts) {
+const Home = (props: TPosts) => {
   const { posts } = props;
 
   return (
-    <>
-      <MetaSEO
-        title="Blog | Vaishnav Chandurkar"
-        description="Software Engineer @Peerlist"
-        keywords="Engineer, Frontend Developer, Developer"
-        ogImage="/images/vaishnav_og.png"
-      />
-      <div className="mt-20">
-        <h1 className={`${rufina.className} text-3xl pb-10 mb-10`}>Blog</h1>
-        {posts && posts.length > 0 && (
-          <ul className="flex max-w-3xl px-4 flex-col space-y-16 pb-10">
-            {posts.map((post: Post) => (
-              <li key={post.slug}>
-                <BlogCard post={post} />
-              </li>
-            ))}
-          </ul>
-        )}
+    <div>
+      <div className="mb-10">
+        <h1 className="text-5xl mb-5 font-display">Blog</h1>
+        <p className="text-gray-400 text-base font-light">
+          Writings about my journey as a developer, learning through the
+          products I build, and life experiences.
+        </p>
       </div>
-    </>
+
+      <ul>
+        {posts.map((post: TPostFrontmatter) => (
+          <li key={post.slug}>
+            <Link
+              href={`/blog/${post.slug}`}
+              className=" border-b border-gray-100 block py-4 group"
+            >
+              <h2 className="text-[28px] font-display group-hover:text-purple-500 transition-all duration-200">
+                {post.title}
+              </h2>
+              <div className="text-sm font-light text-gray-400 mt-2">
+                <p className="mb-4 text-sm">
+                  {helpers.dateFormatter(post.publishedAt)} •{" "}
+                  <span>{post.readTime.text}</span>
+                </p>
+                <p>{post.summary}</p>
+              </div>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
-}
+};
+
+export default Home;
 
 export const getStaticProps: GetStaticProps = async () => {
   try {
-    const allArticles = await notionServices.getAllPublished();
+    const allArticles = await blogService.getAllPublished();
+
     return {
       props: {
         posts: JSON.parse(JSON.stringify(allArticles)),

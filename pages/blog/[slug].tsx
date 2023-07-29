@@ -1,52 +1,53 @@
 import { GetStaticPaths, GetStaticProps } from "next";
-import { ParsedUrlQuery } from "querystring";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
-import notionServices from "@/lib/notion-services";
-import { Post } from "@/utils/types";
-import MetaSEO from "@/components/UIElements/MetaSEO";
-import MDXComponents from "@/components/MDXComponents";
-import rufina from "@/components/UIElements/Font";
-interface Article {
-  article: MDXRemoteSerializeResult;
-  frontmatter: Post;
+import { ParsedUrlQuery } from "querystring";
+import MDXComponents from "@/components/MDXComponent";
+import blogService from "@/lib/blog.services";
+import { TPostFrontmatter } from "@/utils/global.types";
+import helpers from "@/utils/helpers";
+
+interface IPostContent {
+  source: MDXRemoteSerializeResult;
+  header: TPostFrontmatter;
 }
 
-const Article = (props: Article) => {
-  const { article, frontmatter } = props;
+interface IBlogPost {
+  post: IPostContent;
+}
+
+const Blog = (props: IBlogPost) => {
+  const { post } = props;
 
   return (
-    <>
-      <MetaSEO
-        title={frontmatter.title}
-        description={frontmatter.description}
-        keywords={frontmatter.tags}
-      />
-
-      <div className="max-w-2xl mx-auto pb-10">
-        <article>
-          <h1
-            className={`${rufina.className} mt-6 text-4xl font-bold tracking-normal text-gray-gray-12`}
-          >
-            {frontmatter.title}
-          </h1>
-          <div className="prose">
-            <MDXRemote {...article} components={MDXComponents} />
-          </div>
-        </article>
+    <div>
+      <h1 className="font-display text-5xl leading-[60px] mb-6">
+        {post.header.title}
+      </h1>
+      <p className="text-gray-400 font-light">
+        {helpers.dateFormatter(post.header.publishedAt)} •{" "}
+        <span>{post.header.readTime?.text}</span>
+      </p>
+      <div className="prose my-10">
+        <MDXRemote {...post.source} components={MDXComponents} />
       </div>
-    </>
+    </div>
   );
 };
 
-export default Article;
+export default Blog;
 
 interface IParams extends ParsedUrlQuery {
   slug: string;
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const posts = await notionServices.getAllPublished();
-  const paths = posts.map(({ slug }) => ({ params: { slug } }));
+  const posts = await blogService.getAllPublished();
+
+  const paths = posts.map((post) => ({
+    params: {
+      slug: post.slug,
+    },
+  }));
 
   return {
     paths,
@@ -58,19 +59,15 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const { slug } = context.params as IParams;
 
   try {
-    const article = await notionServices.getBlogPostBySlug(slug);
-
-    if (!article) {
-      throw new Error("blog post not found");
-    }
+    const post = await blogService.getPostBySlug(slug);
 
     return {
       props: {
-        article,
-        frontmatter: article.frontmatter,
+        post: JSON.parse(JSON.stringify(post)),
       },
     };
   } catch (err) {
+    console.log("ERROR: ", err);
     return {
       notFound: true,
     };
