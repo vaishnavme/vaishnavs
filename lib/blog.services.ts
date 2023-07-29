@@ -29,7 +29,10 @@ const blogService = {
       const readTime = readingTime(content);
 
       const frontMatter = {
-        ...data,
+        title: data.title,
+        summary: data.summary,
+        publishedAt: data.publishedAt,
+        image: data.image,
         readTime,
         slug: article.replace(".mdx", '')
       }

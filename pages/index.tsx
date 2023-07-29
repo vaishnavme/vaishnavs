@@ -4,6 +4,7 @@ import blogService from "@/lib/blog.services";
 import helpers from "@/utils/helpers";
 import { TPostFrontmatter, TPosts } from "@/utils/global.types";
 import MetaSEO from "@/components/UI/MetaSEO";
+import generateRSSFeed from "@/lib/rss.services";
 
 const Home = (props: TPosts) => {
   const { posts } = props;
@@ -54,6 +55,7 @@ export default Home;
 
 export const getStaticProps: GetStaticProps = async () => {
   try {
+    await generateRSSFeed();
     const allArticles = await blogService.getAllPublished();
 
     return {
