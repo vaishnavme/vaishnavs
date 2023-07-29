@@ -9,7 +9,7 @@
 }
 
 .prose p {
-  @apply text-black leading-7 font-light;
+  @apply text-gray-700 font-normal font-body leading-7;
 }
 
 .prose a strong {
