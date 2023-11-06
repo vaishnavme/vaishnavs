@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { GetStaticProps } from "next";
-import blogService from "@/lib/blog.services";
 import helpers from "@/utils/helpers";
 import { TPostFrontmatter, TPosts } from "@/utils/global.types";
 import MetaSEO from "@/components/UI/MetaSEO";
 import generateRSSFeed from "@/lib/rss.services";
+import notionServices from "@/lib/notion.services";
 
 const Home = (props: TPosts) => {
   const { posts } = props;
@@ -30,17 +30,16 @@ const Home = (props: TPosts) => {
             <li key={post.slug}>
               <Link
                 href={`/blog/${post.slug}`}
-                className=" border-b border-gray-100 block py-4 group"
+                className="block py-4 group mb-4"
               >
-                <h2 className="text-[28px] font-normal tracking-tight font-display group-hover:text-purple-500 transition-all duration-200">
+                <h2 className=" text-3xl font-normal tracking-tight font-display transition-all duration-200">
                   {post.title}
                 </h2>
                 <div className="text-sm text-gray-500 mt-2">
-                  <p className="mb-4 text-sm">
-                    {helpers.dateFormatter(post.publishedAt)} •{" "}
-                    <span>{post.readTime.text}</span>
+                  <p className="mb-0.5 text-sm">
+                    {helpers.dateFormatter(post.publishedAt)}
                   </p>
-                  <p>{post.summary}</p>
+                  <p>{post.description}</p>
                 </div>
               </Link>
             </li>
@@ -55,12 +54,11 @@ export default Home;
 
 export const getStaticProps: GetStaticProps = async () => {
   try {
-    await generateRSSFeed();
-    const allArticles = await blogService.getAllPublished();
+    const allPosts = await notionServices.getAllPublished();
 
     return {
       props: {
-        posts: JSON.parse(JSON.stringify(allArticles)),
+        posts: JSON.parse(JSON.stringify(allPosts)),
       },
     };
   } catch (error) {
