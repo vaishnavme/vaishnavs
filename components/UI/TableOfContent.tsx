@@ -17,7 +17,7 @@ const TableOfContent = (props) => {
             <li className="w-full block" key={link}>
               <Link
                 href={`#${link}`}
-                className="text-xs font-medium hover:bg-pastel-slate1 hover:text-pastel-green1 px-2 py-3 rounded block transition-all duration-200"
+                className="text-xs font-medium hover:bg-pastel-slate1 hover:text-pastel-green1 focus:bg-pastel-slate1 focus:text-pastel-green1 px-2 py-3 rounded block transition-all duration-200"
               >
                 {tocItem.text}
               </Link>

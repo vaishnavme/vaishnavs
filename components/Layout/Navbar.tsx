@@ -19,7 +19,7 @@ const Navbar = () => {
     <nav className="w-full flex items-center justify-between p-4">
       <Link
         href="/"
-        className="font-display text-3xl transition-all hover:text-pastel-green1"
+        className="font-display text-3xl transition-all hover:text-pastel-green1 focus:text-pastel-green1"
       >
         va
       </Link>
@@ -29,7 +29,7 @@ const Navbar = () => {
           <Link
             key={page.label}
             href={page.link}
-            className={`transition-all hover:text-pastel-green1 ${
+            className={`transition-all hover:text-pastel-green1 focus:text-pastel-green1 ${
               router.pathname === page.link
                 ? "text-pastel-green1"
                 : "text-gray-600"
