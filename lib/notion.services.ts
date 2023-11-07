@@ -32,7 +32,6 @@ const notionServices = {
         },
       ],
     });
-
     const allPosts = response.results.map((post: TPostFrontmatter) =>
       notionServices.getPageFrontmatter(post)
     );
@@ -97,6 +96,7 @@ const notionServices = {
       slug: post.properties.slug.rich_text[0].plain_text,
       description: post.properties.Description.rich_text[0].plain_text,
       publishedAt: post.properties.Date.date.start,
+      cover: post?.cover?.external?.url || post?.cover?.file?.url || "",
     };
 
     return frontMatter;
