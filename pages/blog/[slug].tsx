@@ -26,12 +26,9 @@ const Blog = (props: IBlogPost) => {
         description={post.header.description}
       />
       <div>
-        <h1 className="font-display text-5xl leading-[60px] mb-6">
+        <h1 className="font-display text-5xl leading-[54px] mb-6">
           {post.header.title}
         </h1>
-        <p className="text-gray-500 text-sm">
-          {helpers.dateFormatter(post.header.publishedAt)} •{" "}
-        </p>
         <div className="prose my-10">
           <MDXRemote {...post.source} components={MDXComponents} />
         </div>
