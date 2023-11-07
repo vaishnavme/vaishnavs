@@ -54,6 +54,7 @@ export default Home;
 export const getStaticProps: GetStaticProps = async () => {
   try {
     const allPosts = await notionServices.getAllPublished();
+    await generateRSSFeed();
 
     return {
       props: {

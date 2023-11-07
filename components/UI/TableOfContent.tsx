@@ -1,14 +1,16 @@
+import { TTableOfContent } from "@/utils/global.types";
 import helpers from "@/utils/helpers";
 import Link from "next/link";
 
-const TableOfContent = (props) => {
+const TableOfContent = (props: TTableOfContent) => {
   const { tableOfContent } = props;
 
   return (
-    <div className="w-64 fixed left-20 mt-4">
+    <div className="bg-white w-64 hidden xl:block xl:fixed left-20 rounded-lg py-4">
       <p className="text-base font-medium mb-4 px-2 font-display">
         Table Of Content
       </p>
+
       <ul className="w-full block">
         {tableOfContent.map((tocItem) => {
           const link = helpers.generateSlug(tocItem.text);
