@@ -16,7 +16,7 @@ const notion = new Client({
 const n2m = new NotionToMarkdown({ notionClient: notion });
 
 const notionServices = {
-  getAllPublished: async() => {
+  getAllPublished: async () => {
     const response = await notion.databases.query({
       database_id: process.env.NOTION_DATABASE_ID,
       filter: {
@@ -33,11 +33,13 @@ const notionServices = {
       ],
     });
 
-    const allPosts = response.results.map((post: TPostFrontmatter) => notionServices.getPageFrontmatter(post));
+    const allPosts = response.results.map((post: TPostFrontmatter) =>
+      notionServices.getPageFrontmatter(post)
+    );
     return allPosts;
   },
 
-  getPostBySlug: async(slug: string) => {
+  getPostBySlug: async (slug: string) => {
     const response = await notion.databases.query({
       database_id: process.env.NOTION_DATABASE_ID,
       filter: {
@@ -57,6 +59,8 @@ const notionServices = {
     const markdownString = n2m.toMarkdownString(markdownBlocks);
 
     const { content } = matter(markdownString.parent);
+
+    const tableOfContent = notionServices.getTableOfConent(content);
 
     const mdxSource = await serialize(content, {
       mdxOptions: {
@@ -78,25 +82,40 @@ const notionServices = {
       },
       scope: frontMatter,
     });
-    
+
     return {
       header: frontMatter,
-      source: mdxSource
-    }
+      source: mdxSource,
+      tableOfContent,
+    };
   },
 
   getPageFrontmatter: (post: any) => {
     const frontMatter = {
-      id: post.id, 
+      id: post.id,
       title: post.properties.Name.title[0].plain_text,
       slug: post.properties.slug.rich_text[0].plain_text,
       description: post.properties.Description.rich_text[0].plain_text,
       publishedAt: post.properties.Date.date.start,
-    }
+    };
 
     return frontMatter;
   },
 
-}
+  getTableOfConent: (contentString: string) => {
+    const headingRegex = /^(#{1,6})\s+(.*)/gm;
+    const headings = [];
+    let match;
 
-export default notionServices
+    while ((match = headingRegex.exec(contentString)) !== null) {
+      const level = match[1].length; // Number of '#' symbols
+      const text = match[2].trim(); // Heading text
+
+      headings.push({ level, text });
+    }
+
+    return headings;
+  },
+};
+
+export default notionServices;

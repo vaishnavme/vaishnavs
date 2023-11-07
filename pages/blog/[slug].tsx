@@ -3,9 +3,9 @@ import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { ParsedUrlQuery } from "querystring";
 import MDXComponents from "@/components/MDXComponent";
 import { TPostFrontmatter } from "@/utils/global.types";
-import helpers from "@/utils/helpers";
 import MetaSEO from "@/components/UI/MetaSEO";
 import notionServices from "@/lib/notion.services";
+import TableOfContent from "@/components/UI/TableOfContent";
 
 interface IPostContent {
   source: MDXRemoteSerializeResult;
@@ -25,10 +25,13 @@ const Blog = (props: IBlogPost) => {
         title={`${post.header.title} | Vaishnav's Notebook`}
         description={post.header.description}
       />
-      <div>
+
+      <div className="relative">
+        <TableOfContent tableOfContent={post.tableOfContent} />
         <h1 className="font-display text-5xl leading-[54px] mb-6">
           {post.header.title}
         </h1>
+
         <div className="prose my-10">
           <MDXRemote {...post.source} components={MDXComponents} />
         </div>

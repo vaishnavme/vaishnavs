@@ -18,8 +18,8 @@ const Home = (props: TPosts) => {
       />
       <div>
         <div className="mb-10">
-          <h1 className="text-5xl mb-5 font-display">Blog</h1>
-          <p className="text-gray-500 text-base font-light leading-7">
+          <h1 className="text-3xl mb-5 font-display">Blog</h1>
+          <p className="text-gray-600 text-base leading-6">
             Writings about my journey as a developer, learning through the
             products I build, and life experiences.
           </p>
@@ -27,19 +27,18 @@ const Home = (props: TPosts) => {
 
         <ul>
           {posts.map((post: TPostFrontmatter) => (
-            <li key={post.slug}>
+            <li key={post.slug} className="group">
               <Link
                 href={`/blog/${post.slug}`}
-                className="block py-4 group mb-4"
+                className="block p-2 group-hover:bg-pastel-slate1 focus-within:bg-pastel-slate1 focus-within:text-pastel-green1 rounded-md transition-all duration-200"
               >
-                <h2 className=" text-3xl font-normal tracking-tight font-display transition-all duration-200">
+                <h2 className=" text-xl font-normal group-hover:text-pastel-green1 text-inherit tracking-tight font-display transition-all duration-200 mb-1 mt-0">
                   {post.title}
                 </h2>
-                <div className="text-sm text-gray-500 mt-2">
-                  <p className="mb-0.5 text-sm">
+                <div className="text-sm text-gray-500">
+                  <p className="text-xs">
                     {helpers.dateFormatter(post.publishedAt)}
                   </p>
-                  <p>{post.description}</p>
                 </div>
               </Link>
             </li>
