@@ -23,16 +23,18 @@ const generateRSSFeed = async () => {
 
   const allBlogPosts = await notionServices.getAllPublished();
 
-  allBlogPosts.map((post: TPostFrontmatter) => {
-    feed.item({
-      title: post.title,
-      description: post.description,
-      url: `${site_url}/blog/${post.slug}`,
-      date: post.publishedAt,
+  if (allBlogPosts.length) {
+    allBlogPosts.map((post: TPostFrontmatter) => {
+      feed.item({
+        title: post.title,
+        description: post.description,
+        url: `${site_url}/blog/${post.slug}`,
+        date: post.publishedAt,
+      });
     });
-  });
 
-  fs.writeFileSync("./public/rss.xml", feed.xml({ indent: true }));
+    fs.writeFileSync("./public/rss.xml", feed.xml({ indent: true }));
+  }
 };
 
 export default generateRSSFeed;
