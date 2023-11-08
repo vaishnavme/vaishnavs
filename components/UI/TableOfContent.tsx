@@ -1,8 +1,12 @@
-import { TTableOfContent } from "@/utils/global.types";
+import { TTOCItem } from "@/utils/global.types";
 import helpers from "@/utils/helpers";
 import Link from "next/link";
 
-const TableOfContent = (props: TTableOfContent) => {
+interface ITableOfContent {
+  tableOfContent: TTOCItem[];
+}
+
+const TableOfContent = (props: ITableOfContent) => {
   const { tableOfContent } = props;
 
   return (

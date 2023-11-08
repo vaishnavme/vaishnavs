@@ -5,12 +5,12 @@ import MDXComponents from "@/components/MDXComponent";
 import MetaSEO from "@/components/UI/MetaSEO";
 import notionServices from "@/lib/notion.services";
 import TableOfContent from "@/components/UI/TableOfContent";
-import { TPostFrontmatter, TTableOfContent } from "@/utils/global.types";
+import { TPostFrontmatter, TTOCItem } from "@/utils/global.types";
 
 interface IPostContent {
   source: MDXRemoteSerializeResult;
   header: TPostFrontmatter;
-  tableOfContent: TTableOfContent;
+  tableOfContent: TTOCItem[];
 }
 
 interface IBlogPost {

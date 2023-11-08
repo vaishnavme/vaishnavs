@@ -22,7 +22,3 @@ export type TTOCItem = {
   level: number;
   text: string;
 };
-
-export type TTableOfContent = {
-  tableOfContent: TTOCItem[];
-};
