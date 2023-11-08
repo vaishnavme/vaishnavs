@@ -21,7 +21,10 @@ const Navbar = () => {
         href="/"
         className="font-display text-3xl transition-all hover:text-pastel-green1 focus:text-pastel-green1"
       >
-        va
+        <img
+          src="/avatar.svg"
+          className="w-10 h-10 hover:border rounded-full hover:bg-orange-100 transition-all duration-400 hover:scale-110"
+        />
       </Link>
 
       <div className="flex items-center gap-4">

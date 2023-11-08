@@ -27,7 +27,7 @@ const Blog = (props: IBlogPost) => {
         description={post.header.description}
       />
 
-      <div className="relative">
+      <div className="relative mb-10">
         <h1 className="font-display text-4xl xl:text-5xl leading-[54px] mb-6">
           {post.header.title}
         </h1>
