@@ -23,6 +23,7 @@ const Navbar = () => {
       >
         <img
           src="/avatar.svg"
+          alt="avatar_present: Vaishnav Chandurkar"
           className="w-10 h-10 hover:border rounded-full hover:bg-orange-100 transition-all duration-400 hover:scale-110"
         />
       </Link>
@@ -34,8 +35,8 @@ const Navbar = () => {
             href={page.link}
             className={`transition-all hover:text-pastel-green1 focus:text-pastel-green1 ${
               router.pathname === page.link
-                ? "text-pastel-green1"
-                : "text-gray-600"
+                ? "text-pastel-green2"
+                : "text-gray-700"
             }`}
           >
             {page.label}

@@ -20,7 +20,7 @@ const Footer = () => (
       <div>
         <ul className="flex items-center justify-between gap-4">
           {footerlinks.map((item) => (
-            <li>
+            <li key={item.link}>
               <a
                 href={item.link}
                 target="_blank"
