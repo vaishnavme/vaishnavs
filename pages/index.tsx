@@ -13,6 +13,7 @@ const Home = (props: TPosts) => {
     <>
       <MetaSEO
         title="Vaishnav's NoteBook"
+        ogImage="/og-image.webp"
         description="Writings about my journey as a developer, learning through the
             products I build, and life experiences."
       />

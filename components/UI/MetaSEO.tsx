@@ -24,7 +24,7 @@ const MetaSEO = (props: IMetaSEO) => {
 
       {/* <!-- Twitter --> */}
       <meta property="twitter:card" content="summary_large_image" />
-      <meta property="twitter:url" content="https://vaishnavs.vercel.io" />
+      <meta property="twitter:url" content="@vaishnavs0" />
       <meta property="twitter:title" content={title} />
       <meta property="twitter:description" content={description} />
       {ogImage && <meta property="twitter:image" content={ogImage} />}
