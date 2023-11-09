@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@notionhq/client": "^2.2.3",
+    "@notionhq/client": "^2.2.13",
     "@tailwindcss/line-clamp": "^0.4.4",
     "@types/node": "18.14.1",
     "@types/react": "18.0.28",
@@ -19,7 +19,7 @@
     "gray-matter": "^4.0.3",
     "next": "13.2.1",
     "next-mdx-remote": "^4.4.1",
-    "notion-to-md": "^2.5.5",
+    "notion-to-md": "^2.7.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "reading-time": "^1.5.0",

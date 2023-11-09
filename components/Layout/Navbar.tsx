@@ -19,9 +19,13 @@ const Navbar = () => {
     <nav className="w-full flex items-center justify-between p-4">
       <Link
         href="/"
-        className="font-display text-3xl transition-all hover:text-purple-500"
+        className="font-display text-3xl transition-all hover:text-pastel-green1 focus:text-pastel-green1"
       >
-        va
+        <img
+          src="/avatar.svg"
+          alt="avatar_present: Vaishnav Chandurkar"
+          className="w-10 h-10 hover:border rounded-full hover:bg-orange-100 transition-all duration-400 hover:scale-110"
+        />
       </Link>
 
       <div className="flex items-center gap-4">
@@ -29,10 +33,10 @@ const Navbar = () => {
           <Link
             key={page.label}
             href={page.link}
-            className={`transition-all ${
+            className={`transition-all hover:text-pastel-green1 focus:text-pastel-green1 ${
               router.pathname === page.link
-                ? "hover:text-purple-500"
-                : "text-gray-500 font-light"
+                ? "text-pastel-green2"
+                : "text-gray-700"
             }`}
           >
             {page.label}

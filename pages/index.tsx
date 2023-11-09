@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { GetStaticProps } from "next";
-import blogService from "@/lib/blog.services";
 import helpers from "@/utils/helpers";
 import { TPostFrontmatter, TPosts } from "@/utils/global.types";
 import MetaSEO from "@/components/UI/MetaSEO";
 import generateRSSFeed from "@/lib/rss.services";
+import notionServices from "@/lib/notion.services";
 
 const Home = (props: TPosts) => {
   const { posts } = props;
@@ -13,13 +13,14 @@ const Home = (props: TPosts) => {
     <>
       <MetaSEO
         title="Vaishnav's NoteBook"
+        ogImage="/og-image.webp"
         description="Writings about my journey as a developer, learning through the
             products I build, and life experiences."
       />
       <div>
         <div className="mb-10">
-          <h1 className="text-5xl mb-5 font-display">Blog</h1>
-          <p className="text-gray-500 text-base font-light leading-7">
+          <h1 className="text-3xl mb-5 font-display">Blog</h1>
+          <p className="text-gray-600 text-base leading-6">
             Writings about my journey as a developer, learning through the
             products I build, and life experiences.
           </p>
@@ -27,20 +28,18 @@ const Home = (props: TPosts) => {
 
         <ul>
           {posts.map((post: TPostFrontmatter) => (
-            <li key={post.slug}>
+            <li key={post.slug} className="group">
               <Link
                 href={`/blog/${post.slug}`}
-                className=" border-b border-gray-100 block py-4 group"
+                className="block p-2 group-hover:bg-pastel-slate1 focus-within:bg-pastel-slate1 focus-within:text-pastel-green1 rounded-md transition-all duration-200"
               >
-                <h2 className="text-[28px] font-normal tracking-tight font-display group-hover:text-purple-500 transition-all duration-200">
+                <h2 className=" text-xl font-normal group-hover:text-pastel-green1 text-inherit tracking-tight font-display transition-all duration-200 mb-1 mt-0">
                   {post.title}
                 </h2>
-                <div className="text-sm text-gray-500 mt-2">
-                  <p className="mb-4 text-sm">
-                    {helpers.dateFormatter(post.publishedAt)} •{" "}
-                    <span>{post.readTime.text}</span>
+                <div className="text-sm text-gray-500">
+                  <p className="text-xs">
+                    {helpers.dateFormatter(post.publishedAt)}
                   </p>
-                  <p>{post.summary}</p>
                 </div>
               </Link>
             </li>
@@ -55,17 +54,19 @@ export default Home;
 
 export const getStaticProps: GetStaticProps = async () => {
   try {
+    const allPosts = await notionServices.getAllPublished();
     await generateRSSFeed();
-    const allArticles = await blogService.getAllPublished();
 
     return {
       props: {
-        posts: JSON.parse(JSON.stringify(allArticles)),
+        posts: JSON.parse(JSON.stringify(allPosts)),
       },
     };
   } catch (error) {
     return {
-      notFound: true,
+      props: {
+        posts: [],
+      },
     };
   }
 };

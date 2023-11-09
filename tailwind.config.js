@@ -13,10 +13,10 @@ module.exports = {
         display: "Rufina",
       },
       colors: {
-        gray: {
-          "gray-1": "#161616",
-          "gray-2": "#1c1c1c",
-          "gray-12": "#ededed",
+        pastel: {
+          green1: "#4c9878",
+          green2: "#208259",
+          slate1: "#f4f8f7",
         },
       },
     },

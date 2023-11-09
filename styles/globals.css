@@ -9,7 +9,7 @@
 }
 
 .prose p {
-  @apply text-gray-700 font-normal font-body leading-7;
+  @apply text-[#1C1E21] font-normal text-sm font-body leading-6 my-4;
 }
 
 .prose a strong {
@@ -17,7 +17,27 @@
 }
 
 .prose h1, h2, h3, h4, h5  h6 {
-  @apply font-semibold font-display;
+  @apply font-semibold font-display text-[#282828] my-4;
+}
+
+.prose h1 {
+  @apply text-3xl leading-8;
+}
+
+.prose h2 {
+  @apply text-2xl leading-8;
+}
+
+.prose h3 {
+  @apply text-xl leading-6;
+}
+
+.prose h4 {
+  @apply text-lg leading-5;
+}
+
+.prose h6 {
+  @apply text-base leading-5;
 }
 
 .prose :where(p):not(:where([class~=not-prose] *)) {
@@ -42,13 +62,14 @@
 }
 
 .prose :where(a):not(:where([class~=not-prose] *)) {
-  color: var(--tw-prose-links);
-  font-weight: 600;
+  color: #4c9878;
+  font-weight: 400;
   text-decoration: underline;
-  text-decoration-color: var(--tw-prose-underline);
+  text-decoration-color: #bcbaba77;
   transition-property: color,text-decoration-color;
   transition-duration: .15s;
   transition-timing-function: cubic-bezier(.4,0,.2,1);
+  text-underline-offset: 2px;
 }
 
 .prose :where(ul,ol):not(:where([class~=not-prose] *)) {
@@ -58,8 +79,7 @@
   list-style-type: decimal;
 }
 .prose :where(.prose>*):not(:where([class~=not-prose] *)) {
-  margin-top: 2.5rem;
-  margin-bottom: 2.5rem;
+  @apply mt-8 mb-4;
 }
 .prose :where(li):not(:where([class~=not-prose] *)) {
   margin-top: 1.5rem;
@@ -76,7 +96,6 @@
 
 .prose .anchor {
   @apply absolute invisible no-underline;
-
   margin-left: -1em;
   padding-right: 0.5em;
   width: 80%;
@@ -89,11 +108,11 @@
 }
 
 .prose a {
-  @apply transition-all text-teal-500 font-normal;
+  @apply transition-all text-[#4c9878] font-normal hover:text-[#4daa83];
 }
 
 .prose .anchor:after {
-  @apply text-gray-300 dark:text-gray-700;
+  @apply text-[#4c9878];
   content: '#';
 }
 

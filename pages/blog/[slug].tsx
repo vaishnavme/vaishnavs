@@ -2,14 +2,15 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { ParsedUrlQuery } from "querystring";
 import MDXComponents from "@/components/MDXComponent";
-import blogService from "@/lib/blog.services";
-import { TPostFrontmatter } from "@/utils/global.types";
-import helpers from "@/utils/helpers";
 import MetaSEO from "@/components/UI/MetaSEO";
+import notionServices from "@/lib/notion.services";
+import TableOfContent from "@/components/UI/TableOfContent";
+import { TPostFrontmatter, TTOCItem } from "@/utils/global.types";
 
 interface IPostContent {
   source: MDXRemoteSerializeResult;
   header: TPostFrontmatter;
+  tableOfContent: TTOCItem[];
 }
 
 interface IBlogPost {
@@ -23,16 +24,15 @@ const Blog = (props: IBlogPost) => {
     <>
       <MetaSEO
         title={`${post.header.title} | Vaishnav's Notebook`}
-        description={post.header.summary}
+        description={post.header.description}
       />
-      <div>
-        <h1 className="font-display text-5xl leading-[60px] mb-6">
+
+      <div className="relative mb-10">
+        <h1 className="font-display text-4xl xl:text-5xl leading-[54px] mb-6">
           {post.header.title}
         </h1>
-        <p className="text-gray-500 text-sm">
-          {helpers.dateFormatter(post.header.publishedAt)} •{" "}
-          <span>{post.header.readTime?.text}</span>
-        </p>
+        <TableOfContent tableOfContent={post.tableOfContent} />
+
         <div className="prose my-10">
           <MDXRemote {...post.source} components={MDXComponents} />
         </div>
@@ -48,9 +48,9 @@ interface IParams extends ParsedUrlQuery {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const posts = await blogService.getAllPublished();
+  const posts = await notionServices.getAllPublished();
 
-  const paths = posts.map((post) => ({
+  const paths = posts.map((post: TPostFrontmatter) => ({
     params: {
       slug: post.slug,
     },
@@ -66,7 +66,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const { slug } = context.params as IParams;
 
   try {
-    const post = await blogService.getPostBySlug(slug);
+    const post = await notionServices.getPostBySlug(slug);
 
     return {
       props: {
@@ -74,7 +74,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
       },
     };
   } catch (err) {
-    console.log("ERROR: ", err);
     return {
       notFound: true,
     };
