@@ -3,9 +3,9 @@ import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { ParsedUrlQuery } from "querystring";
 import MDXComponents from "@/components/MDXComponent";
 import MetaSEO from "@/components/UI/MetaSEO";
-import notionServices from "@/lib/notion.services";
 import TableOfContent from "@/components/UI/TableOfContent";
 import { TPostFrontmatter, TTOCItem } from "@/utils/global.types";
+import blogService from "@/lib/blog.services";
 
 interface IPostContent {
   source: MDXRemoteSerializeResult;
@@ -48,9 +48,9 @@ interface IParams extends ParsedUrlQuery {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const posts = await notionServices.getAllPublished();
+  const posts = await blogService.getAllPublished();
 
-  const paths = posts.map((post: TPostFrontmatter) => ({
+  const paths = posts.map((post) => ({
     params: {
       slug: post.slug,
     },
@@ -66,7 +66,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const { slug } = context.params as IParams;
 
   try {
-    const post = await notionServices.getPostBySlug(slug);
+    const post = await blogService.getPostBySlug(slug);
+    // const post = await notionServices.getPostBySlug(slug);
 
     return {
       props: {

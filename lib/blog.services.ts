@@ -10,19 +10,19 @@ import fs from "fs";
 import path from "path";
 
 const blogService = {
-  getContentPath: (filePath = '') => {
+  getContentPath: (filePath = "") => {
     const rootPath = process.cwd();
-    const contentFolder = path.join(path.join(rootPath, 'content', filePath));
+    const contentFolder = path.join(path.join(rootPath, "content", filePath));
     return contentFolder;
   },
 
-  getAllPublished: async() => {
+  getAllPublished: async () => {
     const contentPath = blogService.getContentPath();
     const mdxFiles = fs.readdirSync(contentPath);
 
     const allArticles = mdxFiles.map((article) => {
       const articlePath = blogService.getContentPath(article);
-    
+
       const source = fs.readFileSync(articlePath);
 
       const { data, content } = matter(source);
@@ -34,22 +34,22 @@ const blogService = {
         publishedAt: data.publishedAt,
         image: data.image,
         readTime,
-        slug: article.replace(".mdx", '')
-      }
+        slug: article.replace(".mdx", ""),
+      };
       return frontMatter;
-    })
+    });
 
     return allArticles;
   },
 
-  getAllPostFiles: async() => {
+  getAllPostFiles: async () => {
     const contentPath = blogService.getContentPath();
     const mdxFiles = fs.readFileSync(contentPath);
 
     return mdxFiles;
   },
 
-  getPostBySlug: async(slug: string) => {
+  getPostBySlug: async (slug: string) => {
     const contentPath = blogService.getContentPath(`${slug}.mdx`);
 
     const source = fs.readFileSync(contentPath);
@@ -57,6 +57,8 @@ const blogService = {
     const { data, content } = matter(source);
 
     const readTime = readingTime(content);
+
+    const tableOfContent = blogService.getTableOfConent(content);
 
     const mdxSource = await serialize(content, {
       mdxOptions: {
@@ -81,13 +83,29 @@ const blogService = {
 
     return {
       source: mdxSource,
+      tableOfContent,
       header: {
         ...mdxSource.scope,
-        slug, 
-        readTime
-      }
+        slug,
+        readTime,
+      },
+    };
+  },
+
+  getTableOfConent: (contentString: string) => {
+    const headingRegex = /^(#{1,6})\s+(.*)/gm;
+    const headings = [];
+    let match;
+
+    while ((match = headingRegex.exec(contentString)) !== null) {
+      const level = match[1].length; // Number of '#' symbols
+      const text = match[2].trim(); // Heading text
+
+      headings.push({ level, text });
     }
-  }
-}
+
+    return headings;
+  },
+};
 
 export default blogService;

@@ -4,7 +4,7 @@ import helpers from "@/utils/helpers";
 import { TPostFrontmatter, TPosts } from "@/utils/global.types";
 import MetaSEO from "@/components/UI/MetaSEO";
 import generateRSSFeed from "@/lib/rss.services";
-import notionServices from "@/lib/notion.services";
+import blogService from "@/lib/blog.services";
 
 const Home = (props: TPosts) => {
   const { posts } = props;
@@ -54,7 +54,7 @@ export default Home;
 
 export const getStaticProps: GetStaticProps = async () => {
   try {
-    const allPosts = await notionServices.getAllPublished();
+    const allPosts = await blogService.getAllPublished();
     await generateRSSFeed();
 
     return {
