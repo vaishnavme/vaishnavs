@@ -7,7 +7,7 @@ interface IMetaSEO {
 }
 
 const MetaSEO = (props: IMetaSEO) => {
-  const { title = "", description = "", ogImage = null } = props;
+  const { title = "", description = "", ogImage = "/vaishnavs.png" } = props;
   return (
     <Head>
       {/* <!-- Primary Meta Tags --> */}
@@ -20,14 +20,21 @@ const MetaSEO = (props: IMetaSEO) => {
       <meta property="og:url" content="https://vaishnavs.vercel.io" />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
-      {ogImage && <meta property="og:image" content={ogImage} />}
 
       {/* <!-- Twitter --> */}
       <meta property="twitter:card" content="summary_large_image" />
       <meta property="twitter:url" content="@vaishnavs0" />
       <meta property="twitter:title" content={title} />
       <meta property="twitter:description" content={description} />
-      {ogImage && <meta property="twitter:image" content={ogImage} />}
+      {ogImage ? (
+        <>
+          <meta property="twitter:image" content={ogImage} />
+          <meta name="twitter:image" content={ogImage} />
+          <meta property="og:image" content={ogImage} />
+          <meta property="og:image:width" content="1200" />
+          <meta property="og:image:height" content="628" />
+        </>
+      ) : null}
     </Head>
   );
 };
