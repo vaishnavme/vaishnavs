@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@next/font": "^14.0.4",
     "@tailwindcss/line-clamp": "^0.4.4",
     "@types/node": "18.14.1",
     "@types/react": "18.0.28",

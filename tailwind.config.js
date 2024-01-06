@@ -9,8 +9,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        body: ["Inter", "sans"],
-        display: "Rufina",
+        body: ["var(--font-inter)"],
+        display: ["var(--font-rufina)"],
       },
       colors: {
         pastel: {
