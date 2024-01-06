@@ -1,3 +1,4 @@
+import helpers from "@/utils/helpers";
 import Head from "next/head";
 
 interface IMetaSEO {
@@ -7,11 +8,13 @@ interface IMetaSEO {
   url?: string;
 }
 
+const defaultImage = helpers.getAbsoluteURL("vaishnavs.png");
+
 const MetaSEO = (props: IMetaSEO) => {
   const {
     title = "",
     description = "",
-    ogImage = "/vaishnavs.png",
+    ogImage = defaultImage,
     url = process.env.NEXT_PUBLIC_FE_URL,
   } = props;
   return (
