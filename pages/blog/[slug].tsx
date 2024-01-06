@@ -6,6 +6,7 @@ import MetaSEO from "@/components/UI/MetaSEO";
 import TableOfContent from "@/components/UI/TableOfContent";
 import { TPostFrontmatter, TTOCItem } from "@/utils/global.types";
 import blogService from "@/lib/blog.services";
+import helpers from "@/utils/helpers";
 
 interface IPostContent {
   source: MDXRemoteSerializeResult;
@@ -24,8 +25,9 @@ const Blog = (props: IBlogPost) => {
     <>
       <MetaSEO
         title={`${post.header.title} | Vaishnav's Notebook`}
-        description={post.header.description}
-        ogImage={post.header.image}
+        description={post.header.summary}
+        url={helpers.getAbsoluteURL(post.header.slug)}
+        ogImage={helpers.getAbsoluteURL(post.header.image)}
       />
 
       <div className="relative mb-10">

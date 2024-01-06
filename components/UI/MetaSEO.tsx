@@ -4,10 +4,16 @@ interface IMetaSEO {
   title: string;
   description: string;
   ogImage?: string;
+  url?: string;
 }
 
 const MetaSEO = (props: IMetaSEO) => {
-  const { title = "", description = "", ogImage = "/vaishnavs.png" } = props;
+  const {
+    title = "",
+    description = "",
+    ogImage = "/vaishnavs.png",
+    url = process.env.NEXT_PUBLIC_FE_URL,
+  } = props;
   return (
     <Head>
       {/* <!-- Primary Meta Tags --> */}
@@ -17,18 +23,18 @@ const MetaSEO = (props: IMetaSEO) => {
 
       {/* <!-- Open Graph / Facebook --> */}
       <meta property="og:type" content="website" />
-      <meta property="og:url" content="https://vaishnavs.vercel.io" />
+      <meta property="og:url" content={url} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
 
       {/* <!-- Twitter --> */}
       <meta property="twitter:card" content="summary_large_image" />
       <meta property="twitter:url" content="@vaishnavs0" />
+      <meta name="twitter:site" content="@vaishnavs0" />
       <meta property="twitter:title" content={title} />
       <meta property="twitter:description" content={description} />
       {ogImage ? (
         <>
-          <meta property="twitter:image" content={ogImage} />
           <meta name="twitter:image" content={ogImage} />
           <meta property="og:image" content={ogImage} />
           <meta property="og:image:width" content="1200" />

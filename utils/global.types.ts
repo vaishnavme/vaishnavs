@@ -8,7 +8,7 @@ export type TReadTime = {
 export type TPostFrontmatter = {
   title: string;
   slug: string;
-  description: string;
+  summary: string;
   publishedAt: string;
   image: string;
   readTime: TReadTime;

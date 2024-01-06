@@ -3,9 +3,9 @@ import RSS from "rss";
 import blogService from "./blog.services";
 
 const generateRSSFeed = async () => {
-  if (process.env.BLOG_ENV === "dev") return;
+  if (process.env.NEXT_PUBLIC_ENV === "dev") return;
 
-  const site_url = process.env.SITE_URL || "";
+  const site_url = process.env.NEXT_PUBLIC_FE_URL || "";
 
   const feedOptions = {
     title: "Blog posts | RSS Feed",
