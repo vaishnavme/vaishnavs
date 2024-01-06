@@ -8,16 +8,34 @@
   box-sizing: border-box;
 }
 
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+h1, h2, h3, h4, h5  h6 {
+  font-family: 'Rufina', serif;
+  color: #282828;
+  font-weight: 600
+}
+
 .prose p {
-  @apply text-[#1C1E21] font-normal text-sm font-body leading-6 my-4;
+  color: #1C1E21;
+  font-weight: 400;
+  font-family: 'Inter', sans-serif;
+  line-height: 24px;
+  font-size: 14px;
+  margin: 1rem 0;
 }
 
 .prose a strong {
-  @apply font-normal;
+  font-weight: 400;
 }
 
 .prose h1, h2, h3, h4, h5  h6 {
-  @apply font-semibold font-display text-[#282828] my-4;
+  font-family: 'Rufina', serif;
+  font-weight: 600;
+  color: #282828;
+  margin: 1rem 0;
 }
 
 .prose h1 {
