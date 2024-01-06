@@ -1,0 +1,162 @@
+---
+title: 'Creating Table of Content for MDX Blog'
+publishedAt: '2024-01-06'
+summary: 'Creating a dynamic Table of Contents using Tailwind CSS, offering insights into parsing content, extracting headings, and implementing a component.'
+image: '/images/creating-table-content-for-mdx-blog.png'
+---
+
+# Creating Table of Content for MDX Blog
+
+A dynamic Table of Contents (TOC) component for easy navigation between different topics of the blog. 
+
+
+## Tech Stack:
+
+- NextJs
+- MDX
+- Tailwind CSS
+
+
+## Display complete blog post
+<Callout emoji='⚠️'>
+Assuming you already have a NextJs blog.
+</Callout>
+
+In `[slug].js` we have `getStaticProps` which pre-renders the page at build time. In this, we call `getPostBySlug()` methods.
+
+```jsx
+export const getStaticProps: GetStaticProps = async (context) => {
+  const { slug } = context.params as IParams;
+
+  try {
+    const post = await getPostBySlug(slug);
+
+    return {
+      props: {
+        post: JSON.parse(JSON.stringify(post)),
+      },
+    };
+  } catch (err) {
+    return {
+      notFound: true,
+    };
+  }
+};
+```
+
+
+## Reading Blog Content
+
+Let’s look at `getPostBySlug()` method:
+
+```jsx
+const getPostBySlug = async (slug: string) => {
+    const contentPath = getContentPath(`${slug}.mdx`);
+    const source = fs.readFileSync(contentPath);
+    const { data, content } = matter(source);
+    const tableOfContent = getTableOfConent(content);
+}
+```
+
+
+### Understanding getContentPath() method
+
+I have created a separate method `getContentPath()` to get the path for content. It takes root path, content folder name and file name and returns the complete path.
+
+```jsx
+const getContentPath = (filePath = "") => {
+    const rootPath = process.cwd(); // root 
+    const contentFolder = path.join(path.join(rootPath, "content", filePath));
+    return contentFolder;
+};
+```
+
+Let’s say you have a blog with the slug/file name `creating-table-of-content-component` . The `getContentPath()` function return path which is ***”./content/creating-table-of-content-component.mdx”***
+
+```jsx
+const source = fs.readFileSync(contentPath);
+const { data, content } = matter(source);
+```
+
+`fs.readFileSync` reads the file content which we then pass to matter([gray-matter](https://www.npmjs.com/package/gray-matter)). gray-matter is used to parse the markdown content. In the above example, `data` would contain the metadata extracted from the front matter, and `content` would contain the main content of the MDX file.
+
+
+### Parsing content to get Heading
+
+we will be using `content` to create a Table of Contents. For a table of contents, we parse the content and look for heading tags (h2 to h6). and add them to the array as an object with heading text and heading level. For example: ## this is heading two.
+
+```jsx
+// example object in table of content
+{
+	text: 'this is heading two',
+	level: 2
+}
+```
+
+Let’s look at complete code
+
+```jsx
+const getTableOfConent = (contentString: string) => {
+    const headingRegex = /^(#{1,6})\s+(.*)/gm;
+    const headings = [];
+    let match;
+    // loop through the content string and extract headings using the regex
+    while ((match = headingRegex.exec(contentString)) !== null) {
+      const level = match[1].length; // Number of '#' symbols
+      const text = match[2].trim(); // Heading text
+
+      headings.push({ level, text });
+    }
+
+    return headings;
+};
+```
+We will get an array of objects with all headings and their levels. we can use it to create a table. we will need to return, `tableOfContent` data along with serialize markdown(MDX) data.
+
+
+## Table of Content component
+
+```jsx
+const TableOfContent = (props: ITableOfContent) => {
+  const { tableOfContent } = props;
+
+	const const generateSlug = (text: string) =>
+  text
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, "")
+    .replace(/[\s_-]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
+  return (
+    <div className="bg-white w-64 hidden xl:block xl:fixed left-20 rounded-lg py-4">
+      <p className="text-base font-medium mb-4 px-2 font-display">
+        Table Of Content
+      </p>
+
+      <ul className="w-full block">
+        {tableOfContent.map((tocItem) => {
+          const link = generateSlug(tocItem.text);
+
+          return (
+            <li className="w-full block" key={link}>
+              <Link
+                href={`#${link}`}
+                className="text-xs font-medium hover:bg-pastel-slate1 hover:text-pastel-green1 focus:bg-pastel-slate1 focus:text-pastel-green1 px-2 py-3 rounded block transition-all duration-200"
+              >
+                {tocItem.text}
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
+};
+```
+
+Markdown processors automatically add an id to all heading tags. This id actual heading text in lowercase and words separated by a dash(-). Adding custom IDs allows you to link directly to headings. 
+
+The `generateSlug` function creates the same id text from the heading, You can link to headings with id’s in the file by creating a [standard link](https://www.markdownguide.org/basic-syntax/#links) with a number sign (`#`) followed by the custom heading ID. These are commonly referred to as *anchor links*.
+
+Check out Table of Content on 👈🏼 Left Side of blog post(on Desktop).

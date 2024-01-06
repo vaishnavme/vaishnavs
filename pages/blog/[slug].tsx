@@ -25,6 +25,7 @@ const Blog = (props: IBlogPost) => {
       <MetaSEO
         title={`${post.header.title} | Vaishnav's Notebook`}
         description={post.header.description}
+        ogImage={post.header.image}
       />
 
       <div className="relative mb-10">
@@ -67,7 +68,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   try {
     const post = await blogService.getPostBySlug(slug);
-    // const post = await notionServices.getPostBySlug(slug);
 
     return {
       props: {
