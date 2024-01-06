@@ -51,10 +51,10 @@ Let’s look at `getPostBySlug()` method:
 
 ```jsx
 const getPostBySlug = async (slug: string) => {
-    const contentPath = getContentPath(`${slug}.mdx`);
-    const source = fs.readFileSync(contentPath);
-    const { data, content } = matter(source);
-    const tableOfContent = getTableOfConent(content);
+  const contentPath = getContentPath(`${slug}.mdx`);
+  const source = fs.readFileSync(contentPath);
+  const { data, content } = matter(source);
+  const tableOfContent = getTableOfConent(content);
 }
 ```
 
@@ -65,9 +65,9 @@ I have created a separate method `getContentPath()` to get the path for content.
 
 ```jsx
 const getContentPath = (filePath = "") => {
-    const rootPath = process.cwd(); // root 
-    const contentFolder = path.join(path.join(rootPath, "content", filePath));
-    return contentFolder;
+  const rootPath = process.cwd(); // root 
+  const contentFolder = path.join(path.join(rootPath, "content", filePath));
+  return contentFolder;
 };
 ```
 
@@ -93,25 +93,25 @@ we will be using `content` to create a Table of Contents. For a table of content
 }
 ```
 
-Let’s look at complete code
 
-```jsx
+Let’s look at complete code,
+
+```js
 const getTableOfConent = (contentString: string) => {
-    const headingRegex = /^(#{1,6})\s+(.*)/gm;
-    const headings = [];
-    let match;
-    // loop through the content string and extract headings using the regex
-    while ((match = headingRegex.exec(contentString)) !== null) {
-      const level = match[1].length; // Number of '#' symbols
-      const text = match[2].trim(); // Heading text
-
-      headings.push({ level, text });
-    }
-
-    return headings;
-};
+  const headingRegex = /(#{1,6})\s+(.*)/gm;
+  const headings = [];
+  let match;
+  // loop through the content string and extract headings using the regex
+  while ((match = headingRegex.exec(contentString)) !== null) {
+    const level = match[1].length; // Number of '#' symbols
+    const text = match[2].trim(); // Heading text
+    headings.push({ level, text });
+  }
+  return headings;
+}
 ```
-We will get an array of objects with all headings and their levels. we can use it to create a table. we will need to return, `tableOfContent` data along with serialize markdown(MDX) data.
+
+We will get an array of objects with all headings and their levels. we can use it to create a table. we will need to return, tableOfContent data along with serialize markdown(MDX) data.
 
 
 ## Table of Content component
@@ -126,7 +126,7 @@ const TableOfContent = (props: ITableOfContent) => {
     .trim()
     .replace(/[^\w\s-]/g, "")
     .replace(/[\s_-]+/g, "-")
-    .replace(/^-+|-+$/g, "");
+    .replace(/-+|-+/g, "");
 
   return (
     <div className="bg-white w-64 hidden xl:block xl:fixed left-20 rounded-lg py-4">
@@ -154,7 +154,6 @@ const TableOfContent = (props: ITableOfContent) => {
   );
 };
 ```
-
 Markdown processors automatically add an id to all heading tags. This id actual heading text in lowercase and words separated by a dash(-). Adding custom IDs allows you to link directly to headings. 
 
 The `generateSlug` function creates the same id text from the heading, You can link to headings with id’s in the file by creating a [standard link](https://www.markdownguide.org/basic-syntax/#links) with a number sign (`#`) followed by the custom heading ID. These are commonly referred to as *anchor links*.
