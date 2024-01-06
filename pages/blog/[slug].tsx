@@ -29,9 +29,6 @@ const Blog = (props: IBlogPost) => {
       />
 
       <div className="relative mb-10">
-        <h1 className="font-display text-4xl xl:text-5xl leading-[54px] mb-6">
-          {post.header.title}
-        </h1>
         <TableOfContent tableOfContent={post.tableOfContent} />
 
         <div className="prose my-10">
