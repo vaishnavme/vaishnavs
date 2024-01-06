@@ -1,7 +1,6 @@
 import fs from "fs";
 import RSS from "rss";
-import notionServices from "./notion.services";
-import { TPostFrontmatter } from "@/utils/global.types";
+import blogService from "./blog.services";
 
 const generateRSSFeed = async () => {
   if (process.env.BLOG_ENV === "dev") return;
@@ -21,13 +20,13 @@ const generateRSSFeed = async () => {
 
   const feed = new RSS(feedOptions);
 
-  const allBlogPosts = await notionServices.getAllPublished();
+  const allBlogPosts = await blogService.getAllPublished();
 
   if (allBlogPosts.length) {
-    allBlogPosts.map((post: TPostFrontmatter) => {
+    allBlogPosts.map((post) => {
       feed.item({
         title: post.title,
-        description: post.description,
+        description: post.summary,
         url: `${site_url}/blog/${post.slug}`,
         date: post.publishedAt,
       });
