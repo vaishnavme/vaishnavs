@@ -10,7 +10,7 @@ const TableOfContent = (props: ITableOfContent) => {
   const { tableOfContent } = props;
 
   return (
-    <div className="bg-white w-64 hidden xl:block xl:fixed left-20 rounded-lg py-4">
+    <div className="bg-white w-64 hidden xl:block xl:fixed rounded-lg py-4 -ml-96">
       <p className="text-base font-medium mb-4 px-2 font-display">
         Table Of Content
       </p>
