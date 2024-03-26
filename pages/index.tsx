@@ -32,7 +32,7 @@ const Home = (props: TPosts) => {
                 href={`/blog/${post.slug}`}
                 className="block p-2 group-hover:bg-pastel-slate1 focus-within:bg-pastel-slate1 focus-within:text-pastel-green1 rounded-md transition-all duration-200"
               >
-                <h2 className=" text-xl font-normal group-hover:text-pastel-green1 text-inherit tracking-tight font-display transition-all duration-200 mb-1 mt-0">
+                <h2 className=" text-xl group-hover:text-pastel-green1 text-inherit tracking-tight font-display transition-all duration-200 mb-1 mt-0">
                   {post.title}
                 </h2>
                 <div className="text-sm text-gray-500">

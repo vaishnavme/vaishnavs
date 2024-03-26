@@ -10,7 +10,7 @@ module.exports = {
     extend: {
       fontFamily: {
         body: ["var(--font-inter)"],
-        display: ["var(--font-rufina)"],
+        display: ["var(--font-fraunces)"],
       },
       colors: {
         pastel: {
