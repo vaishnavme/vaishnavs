@@ -17,10 +17,11 @@ interface IPostContent {
 
 interface IBlogPost {
   post: IPostContent;
+  ogImage: string;
 }
 
 const Blog = (props: IBlogPost) => {
-  const { post } = props;
+  const { post, ogImage } = props;
 
   return (
     <>
@@ -28,7 +29,7 @@ const Blog = (props: IBlogPost) => {
         title={`${post.header.title} | Vaishnav's Notebook`}
         description={post.header.summary}
         url={helpers.getAbsoluteURL(post.header.slug)}
-        ogImage={`/${post.header.ogImage}`}
+        ogImage={`/${ogImage}`}
       />
 
       <div className="relative mb-10">
@@ -75,11 +76,10 @@ export const getStaticProps: GetStaticProps = async (context) => {
       publishedAt: helpers.dateFormatter(post.header.publishedAt),
     });
 
-    post.header.ogImage = ogImage;
-
     return {
       props: {
         post: JSON.parse(JSON.stringify(post)),
+        ogImage,
       },
     };
   } catch (err) {

@@ -20,7 +20,7 @@ h1, h2, h3, h4, h5  h6 {
 }
 
 .prose p {
-  color: #1C1E21;
+  color: #52525B;
   font-weight: 400;
   font-family: var(--font-inter), sans-serif;
   line-height: 24px;

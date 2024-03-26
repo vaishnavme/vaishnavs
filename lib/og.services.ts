@@ -1,5 +1,5 @@
 import satori from "satori";
-import { readFileSync, writeFileSync } from "fs";
+import { existsSync, readFileSync, writeFileSync } from "fs";
 import { Resvg } from "@resvg/resvg-js";
 import { join } from "path";
 import OGTemplate from "@/components/OGTemplate";
@@ -25,9 +25,11 @@ const generateOGImage = async ({
   const relativePath = `og-images/${slug}.png`;
   const pngPath = join(process.cwd(), publicPath, relativePath);
 
-  const og = OGTemplate({ title, publishedAt });
+  if (existsSync(pngPath)) {
+    return relativePath;
+  }
 
-  console.log;
+  const og = OGTemplate({ title, publishedAt });
 
   const svg = await satori(og, {
     width: 1200,
