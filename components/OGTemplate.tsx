@@ -39,7 +39,7 @@ const OGTemplate = ({
         <p
           style={{
             marginBottom: "2.5rem",
-            fontSize: "2rem",
+            fontSize: "1.8rem",
             lineHeight: "1.75rem",
             color: "#212121",
             fontFamily: "Fraunces_144pt_Soft-Regular",
@@ -63,32 +63,50 @@ const OGTemplate = ({
       <div
         style={{
           display: "flex",
-          flexDirection: "column",
-          alignItems: "flex-start",
+          alignItems: "center",
         }}
       >
-        <p
+        <img
+          src={`${process.env.NEXT_PUBLIC_FE_URL}/avatar.svg`}
+          alt="avatar_present: Vaishnav Chandurkar"
           style={{
-            fontSize: "2rem",
-            lineHeight: "1.25rem",
-            fontWeight: 600,
-            color: "#1F2937",
-            marginBottom: "0px",
+            width: "75px",
+            height: "75px",
+            borderRadius: 9999,
+            gap: "4px",
+          }}
+        />
+
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-start",
           }}
         >
-          Vaishnav
-        </p>
-        <p
-          style={{
-            color: "#4B5563",
-            fontSize: "1.8rem",
-            lineHeight: "1.25rem",
-            fontWeight: 500,
-            marginBottom: "0px",
-          }}
-        >
-          vaishnavs.xyz
-        </p>
+          <p
+            style={{
+              fontSize: "2rem",
+              lineHeight: "1.25rem",
+              fontWeight: 600,
+              color: "#1F2937",
+              marginBottom: "0px",
+            }}
+          >
+            Vaishnav
+          </p>
+          <p
+            style={{
+              color: "#4B5563",
+              fontSize: "1.8rem",
+              lineHeight: "1.25rem",
+              fontWeight: 500,
+              marginBottom: "0px",
+            }}
+          >
+            vaishnavs.xyz
+          </p>
+        </div>
       </div>
     </div>
   </div>
