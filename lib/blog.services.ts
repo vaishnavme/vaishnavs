@@ -86,6 +86,8 @@ const blogService = {
       tableOfContent,
       header: {
         ...mdxSource.scope,
+        title: mdxSource.scope.title as string,
+        publishedAt: mdxSource.scope.publishedAt as string,
         slug,
         readTime,
       },

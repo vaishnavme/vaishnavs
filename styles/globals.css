@@ -13,8 +13,10 @@ body {
 }
 
 h1, h2, h3, h4, h5  h6 {
-  font-family: var(--font-rufina), sans-serif;
+  font-family: var(--font-fraunces), sans-serif;
   color: #282828;
+  font-weight: 300;
+  letter-spacing: -0.05rem;
 }
 
 .prose p {
@@ -31,9 +33,11 @@ h1, h2, h3, h4, h5  h6 {
 }
 
 .prose h1, h2, h3, h4, h5  h6 {
-  font-family: var(--font-rufina), sans-serif;
+  font-family: var(--font-fraunces), sans-serif;
   color: #282828;
   margin: 1rem 0;
+  font-weight: 300;
+  letter-spacing: -0.05rem;
 }
 
 .prose h1 {

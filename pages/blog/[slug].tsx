@@ -7,6 +7,7 @@ import TableOfContent from "@/components/UI/TableOfContent";
 import { TPostFrontmatter, TTOCItem } from "@/utils/global.types";
 import blogService from "@/lib/blog.services";
 import helpers from "@/utils/helpers";
+import generateOGImage from "@/lib/og.services";
 
 interface IPostContent {
   source: MDXRemoteSerializeResult;
@@ -27,7 +28,7 @@ const Blog = (props: IBlogPost) => {
         title={`${post.header.title} | Vaishnav's Notebook`}
         description={post.header.summary}
         url={helpers.getAbsoluteURL(post.header.slug)}
-        ogImage={helpers.getAbsoluteURL(post.header.image)}
+        ogImage={`/${post.header.ogImage}`}
       />
 
       <div className="relative mb-10">
@@ -67,6 +68,14 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   try {
     const post = await blogService.getPostBySlug(slug);
+
+    const ogImage = await generateOGImage({
+      title: post.header.title,
+      slug: post.header.slug,
+      publishedAt: helpers.dateFormatter(post.header.publishedAt),
+    });
+
+    post.header.ogImage = ogImage;
 
     return {
       props: {

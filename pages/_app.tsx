@@ -3,7 +3,7 @@ import type { ReactElement, ReactNode } from "react";
 import type { NextPage } from "next";
 import { Layout } from "@/components/Layout";
 import "@/styles/globals.css";
-import { Inter, Rufina } from "next/font/google";
+import { Inter, Fraunces } from "next/font/google";
 
 export const inter = Inter({
   subsets: ["latin"],
@@ -11,10 +11,10 @@ export const inter = Inter({
   weight: ["400", "600"],
 });
 
-export const rufina = Rufina({
+export const fraunces = Fraunces({
   subsets: ["latin"],
-  variable: "--font-rufina",
-  weight: "400",
+  variable: "--font-fraunces",
+  weight: ["300", "400", "600"],
 });
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
