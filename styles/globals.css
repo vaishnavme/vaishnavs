@@ -133,7 +133,7 @@ h1, h2, h3, h4, h5  h6 {
 }
 
 .rehype-code-title {
-  @apply mb-0  dark:bg-[#0E0E10] bg-zinc-900 px-4 py-2.5 text-white text-xs font-mono border-b-zinc-300/20 border border-zinc-100 dark:border-zinc-300/20 rounded-t-xl;
+  @apply mb-0  dark:bg-[#0E0E10] bg-zinc-900 px-4 py-2.5 text-white text-xs font-mono rounded-t-xl;
 }
 .prose code {
   @apply text-xs;
