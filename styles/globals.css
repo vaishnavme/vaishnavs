@@ -133,14 +133,14 @@ h1, h2, h3, h4, h5  h6 {
 }
 
 .rehype-code-title {
-  @apply mb-0  dark:bg-[#0E0E10] bg-zinc-900 px-4 py-2.5 text-white text-xs font-mono rounded-t-xl;
+  @apply mb-0 h-10 flex items-center dark:bg-[#0E0E10] bg-zinc-900 px-4 py-2.5 text-white text-xs font-mono rounded-t-xl border-b border-zinc-300/20;
 }
 .prose code {
   @apply text-xs;
 }
 
-.rehype-code-title + pre {
-  @apply mt-0 rounded-t-none border-t-0 bg-zinc-900 rounded-xl dark:bg-[#0E0E10];
+.prose .rehype-code-title + pre {
+  @apply mt-0 rounded-t-none border-t-0 bg-zinc-900 rounded-xl dark:bg-[#0E0E10] font-mono italic;
 }
 
 code[class*="language-"],
