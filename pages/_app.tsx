@@ -3,13 +3,7 @@ import type { ReactElement, ReactNode } from "react";
 import type { NextPage } from "next";
 import { Layout } from "@/components/Layout";
 import "@/styles/globals.css";
-import { Inter, Fraunces } from "next/font/google";
-
-export const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  weight: ["400", "600"],
-});
+import { Fraunces } from "next/font/google";
 
 export const fraunces = Fraunces({
   subsets: ["latin"],

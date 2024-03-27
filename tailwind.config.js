@@ -9,7 +9,6 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        body: ["var(--font-inter)"],
         display: ["var(--font-fraunces)"],
       },
       colors: {
@@ -21,5 +20,8 @@ module.exports = {
       },
     },
   },
-  plugins: [require("@tailwindcss/line-clamp")],
+  plugins: [
+    require("@tailwindcss/line-clamp"),
+    require("@tailwindcss/typography"),
+  ],
 };
