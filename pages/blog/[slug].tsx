@@ -35,7 +35,7 @@ const Blog = (props: IBlogPost) => {
       <div className="relative mb-10">
         <TableOfContent tableOfContent={post.tableOfContent} />
 
-        <div className="prose my-10">
+        <div className="prose dark:prose-invert my-10">
           <MDXRemote {...post.source} components={MDXComponents} />
         </div>
       </div>
