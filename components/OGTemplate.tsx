@@ -67,7 +67,7 @@ const OGTemplate = ({
         }}
       >
         <img
-          src={`${process.env.NEXT_PUBLIC_FE_URL}/avatar.svg`}
+          src="https://www.vaishnavs.xyz/avatar.svg"
           alt="avatar_present: Vaishnav Chandurkar"
           style={{
             width: "75px",
